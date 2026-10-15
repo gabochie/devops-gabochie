@@ -25,7 +25,7 @@
 <p class="lead">I take messy vibe-coded codebases → secure, tested, deployable operations. Every claim backed by
 a findings table, a 19-item readiness gate, and verification you can re-run. Ghana payments (MoMo, Flutterwave)
 welcome.</p>
-<a class="btn" href="#assess">Get my free readiness check</a>
+<a class="btn" href="/checklist/">Score yourself in 60 seconds</a>
 <a class="btn ghost" href="#work">See the work</a>
 </div>
 <div>
@@ -85,7 +85,11 @@ welcome.</p>
 <section id="proof">
 <h2>Live pipeline stats</h2>
 <p class="mut">Generated from my working repos on every data refresh — same pipeline I sell.</p>
-<div id="proof-strip" class="grid c3"></div>
+<div id="proof-strip" class="grid c3">
+<div class="card"><h3>Roadmap progress</h3><p class="mut">3/18 rungs (17%) — updated 2026-10-15</p><div class="bar"><i style="width:17%"></i></div></div>
+<div class="card"><h3>Repos hardened</h3><p class="mut">4 end-to-end (studio, aiw, sporafind, KlagonOrg) · 39 tracked</p></div>
+<div class="card"><h3>Method</h3><p class="mut">Audit → approve → verify. Findings table + 19-item gate, every time.</p></div>
+</div>
 </section>
 
 <section id="assess">
@@ -103,9 +107,9 @@ welcome.</p>
 </div>
 <div class="qstep" data-step="3" hidden>
 <p><strong>3. Where should I send your preliminary read?</strong></p>
-<p><input id="lead-url" type="url" inputmode="url" placeholder="https://your-app.com (optional)" maxlength="200" style="width:100%;max-width:28rem;padding:.6rem;border-radius:.5rem;border:1px solid var(--line2);background:#0B1426;color:var(--ink)"></p>
-<p><input id="lead-email" type="email" required placeholder="you@company.com" maxlength="254" style="width:100%;max-width:28rem;padding:.6rem;border-radius:.5rem;border:1px solid var(--line2);background:#0B1426;color:var(--ink)"></p>
-<p class="mut" style="font-size:.85rem"><input id="lead-consent" type="checkbox"> I agree to be emailed my assessment and one follow-up. No list, no spam — delete on request.</p>
+<p><label for="lead-url">Your app's URL (optional)</label><br><input id="lead-url" type="url" inputmode="url" placeholder="https://your-app.com" maxlength="200" style="width:100%;max-width:28rem;padding:.6rem;border-radius:.5rem;border:1px solid var(--line2);background:#0B1426;color:var(--ink)"></p>
+<p><label for="lead-email">Where should I send your preliminary read?</label><br><input id="lead-email" type="email" required placeholder="you@company.com" maxlength="254" style="width:100%;max-width:28rem;padding:.6rem;border-radius:.5rem;border:1px solid var(--line2);background:#0B1426;color:var(--ink)"></p>
+<p class="mut" style="font-size:.85rem"><input id="lead-consent" type="checkbox"> <label for="lead-consent">I agree to be emailed my assessment and one follow-up. No list, no spam — delete on request.</label></p>
 <p style="position:absolute;left:-9999px" aria-hidden="true"><input id="lead-website" type="text" tabindex="-1" autocomplete="off"></p>
 <p><button class="btn" id="lead-submit">Get my preliminary read</button> <button class="btn ghost" id="lead-back" type="button">Back</button></p>
 <p id="lead-msg" class="mut" role="status"></p>

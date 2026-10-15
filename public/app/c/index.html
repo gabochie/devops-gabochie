@@ -22,10 +22,16 @@
 <script>
 (async () => {
   const q = new URLSearchParams(location.search);
-  const err = (m) => { document.getElementById("c-err").textContent = m; document.getElementById("c-title").textContent = "Link invalid"; };
+  const err = (m, recovery) => {
+    document.getElementById("c-title").textContent = "Link invalid";
+    document.getElementById("c-err").innerHTML = m + (recovery
+      ? `<br><br><a class="btn" href="mailto:devops@gabochie.com?subject=${encodeURIComponent("Fresh client link request")}">Request a fresh link</a>
+         <span class="mut">Links expire after 30 days and work on one project only. A fresh one takes minutes on my side.</span>`
+      : "");
+  };
   try {
     const r = await fetch(`/api/client?id=${encodeURIComponent(q.get("id") || "")}&exp=${encodeURIComponent(q.get("exp") || "")}&token=${encodeURIComponent(q.get("token") || "")}`, { cache: "no-store" });
-    if (!r.ok) return err(r.status === 401 ? "This link expired — request a fresh one." : "Couldn't load your page.");
+    if (!r.ok) return err(r.status === 401 ? "This link expired or was made for a different project." : "Couldn't load your page right now.", true);
     const { record } = await r.json();
     document.getElementById("c-title").textContent = record.label;
     document.getElementById("c-meta").textContent = `${record.stack} · ${record.stage}`;
@@ -49,7 +55,7 @@
       } catch { document.getElementById("c-err").textContent = "Network hiccup — try again."; }
       btn.disabled = false;
     }));
-  } catch { err("Network hiccup — try again."); }
+  } catch { err("Network hiccup — check your connection and reload.", false); }
 })();
 </script>
 </body>
