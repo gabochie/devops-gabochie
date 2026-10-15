@@ -1,0 +1,14 @@
+{
+  "name": "Gabochie DevOps — Vibe to Production",
+  "short_name": "GabochieDevOps",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0A1628",
+  "theme_color": "#C9A84C",
+  "description": "Production-hardening for vibe-coded apps. Audits, sprints, CI rescue.",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

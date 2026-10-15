@@ -1,0 +1,8 @@
+name = "devops-gabochie"
+compatibility_date = "2026-10-01"
+
+[vars]
+PUBLIC_SITE_URL = "https://devops.gabochie.com"
+
+# Build output for `wrangler pages deploy public`. Never "." (would ship functions/, scripts/, data/).
+pages_build_output_dir = "public"

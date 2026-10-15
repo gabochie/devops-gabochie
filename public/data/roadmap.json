@@ -1,0 +1,43 @@
+{
+  "generated": "2026-10-15T09:14:34.884Z",
+  "rungs": [
+    {
+      "phase": "Phase 0 — instant-fail signals",
+      "title": "0.1",
+      "done": 2,
+      "total": 4,
+      "pct": 50
+    },
+    {
+      "phase": "Phase 1 — hidden gold",
+      "title": "1.1",
+      "done": 0,
+      "total": 3,
+      "pct": 0
+    },
+    {
+      "phase": "Phase 2 — presentation",
+      "title": "2.0",
+      "done": 1,
+      "total": 5,
+      "pct": 20
+    },
+    {
+      "phase": "Phase 3 — proof",
+      "title": "3.1",
+      "done": 0,
+      "total": 3,
+      "pct": 0
+    },
+    {
+      "phase": "Phase 4 — AWS bridge",
+      "title": "4.1",
+      "done": 0,
+      "total": 3,
+      "pct": 0
+    }
+  ],
+  "done": 3,
+  "total": 18,
+  "pct": 17
+}

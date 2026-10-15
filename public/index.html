@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gabochie DevOps — Vibe-coded apps to production-ready, with evidence</title>
+<meta name="description" content="Production-hardening for vibe-coded apps: readiness audits, hardening sprints, Ghana payments review, CI rescue.">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<span class="brand">Gabochie DevOps</span>
+<nav><a href="#services">Services</a><a href="#proof">Proof</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main class="wrap">
+<section class="hero">
+<p class="kicker">Vibe to production — with evidence, not promises</p>
+<h1>Your AI-built app, hardened to production-ready.</h1>
+<p class="lead">I take messy vibe-coded codebases → secure, tested, deployable operations. Every claim backed by
+a findings table, a 19-item readiness gate, and verification you can re-run. Ghana payments (MoMo, Flutterwave)
+welcome.</p>
+<a class="btn" href="#contact">Book a readiness audit</a>
+<a class="btn ghost" href="#proof">See the proof</a>
+</section>
+
+<section id="services">
+<h2>Services</h2>
+<div class="grid c3">
+<div class="card"><h3>Readiness Audit</h3><p class="mut">Read-only inspection: routes, auth, secrets, DB, tests, deploy. You get a severity-ranked findings table with file:line evidence — no edits, flat fee.</p></div>
+<div class="card"><h3>Hardening Sprint</h3><p class="mut">Riskiest-first fixes in small reversible diffs: authZ at the API layer, input validation, CI gates, rollback rehearsed. Staging before prod, always.</p></div>
+<div class="card"><h3>Payments + CI Rescue</h3><p class="mut">Ghana rails (MoMo pending states, webhook HMAC, idempotent finalize) and red-then-green CI pipelines. If your checkout or pipeline is scary, start here.</p></div>
+</div>
+</section>
+
+<section id="proof">
+<h2>Proof, live from my own hardening queue</h2>
+<p class="mut">This strip is generated from my working repos — same pipeline I sell. Updated on every push.</p>
+<div id="proof-strip" class="grid c3"></div>
+</section>
+
+<section id="process">
+<h2>Process</h2>
+<div class="grid c3">
+<div class="card"><h3>1. Audit</h3><p class="mut">Read-only. Findings table, severity + confidence + evidence.</p></div>
+<div class="card"><h3>2. Approve</h3><p class="mut">You approve one bounded item at a time. Nothing else moves.</p></div>
+<div class="card"><h3>3. Verify</h3><p class="mut">Tests re-run, gate signed GO/NO-GO with remaining risks listed.</p></div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<div class="card"><p class="mut">Tell me your stack + URL + what scares you (checkout? auth? deploy?). First reply includes scope, flat fee, and timeline.</p>
+<p>Email: <a href="mailto:hello@gabochie.com">hello@gabochie.com</a> · GitHub: <a href="https://github.com/gabochie">gabochie</a></p></div>
+</section>
+</main>
+
+<footer><div class="wrap">© 2026 Gabochie DevOps · Hardening-first, evidence always · <a href="/app/">Console</a></div></footer>
+<script>
+fetch("/data/summary.json").then((r) => r.json()).then((d) => {
+  const el = document.getElementById("proof-strip");
+  el.innerHTML = "";
+  const cards = [
+    ["Roadmap progress", `${d.roadmap.done}/${d.roadmap.total} rungs (${d.roadmap.pct}%)`, d.roadmap.pct],
+    ["Repos scanned", `${d.repos.count} tracked`, null],
+    ["Report", `updated ${d.generated.slice(0, 10)}`, null],
+  ];
+  for (const [t, s, pct] of cards) {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `<h3>${t}</h3><p class="mut">${s}</p>` + (pct === null ? "" : `<div class="bar"><i style="width:${pct}%"></i></div>`);
+    el.appendChild(div);
+  }
+}).catch(() => {});
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
+</script>
+</body>
+</html>

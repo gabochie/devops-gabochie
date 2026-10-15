@@ -1,0 +1,2 @@
+/admin /app/ 302
+/api/* /api/:splat 200

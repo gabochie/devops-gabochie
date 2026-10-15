@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Console — Gabochie DevOps hardening queue</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/app/app.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<span class="brand">Hardening Console</span>
+<nav><a href="/">Public site</a><span id="health" class="badge">health: …</span></nav>
+</div></header>
+<main class="wrap">
+<section>
+<h2>Roadmap <span id="roadmap-meta" class="mut"></span></h2>
+<div class="bar big"><i id="roadmap-bar" style="width:0%"></i></div>
+<div id="rungs" class="grid"></div>
+</section>
+<section>
+<h2>Fleet stacks</h2>
+<div id="stack-chart"></div>
+</section>
+<section>
+<h2>Repos <button id="refresh">Refresh live</button> <span id="live-meta" class="mut"></span></h2>
+<table><thead><tr><th>Repo</th><th>Stack</th><th>Commits</th><th>Branches (collected / live)</th><th>CI</th><th>Last push</th></tr></thead>
+<tbody id="repos"></tbody></table>
+</section>
+</main>
+<footer><div class="wrap">Generated data + live GitHub where marked · <span id="gen"></span></div></footer>
+<script src="/app/app.js"></script>
+</body>
+</html>

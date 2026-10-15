@@ -1,0 +1,5 @@
+.bar.big{height:1rem}
+#refresh{margin-left:.5rem}
+svg.chart{width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+svg.chart text{fill:var(--ink);font-size:12px}
+svg.chart .lbl{fill:var(--mut)}
