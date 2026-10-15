@@ -13,7 +13,7 @@
 <header class="top"><div class="wrap">
 <a class="brand" href="/">Gabochie <b>DevOps</b></a>
 <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('header.top').classList.toggle('nav-open')">☰</button>
-<nav class="main"><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#work">Work</a><a href="#process">Process</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+<nav class="main"><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#work">Work</a><a href="#assess">Free check</a><a href="#process">Process</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -88,6 +88,36 @@ welcome.</p>
 <div id="proof-strip" class="grid c3"></div>
 </section>
 
+<section id="assess">
+<h2>Free 60-second readiness check</h2>
+<p class="sub">Answer three questions. Get a preliminary read on your biggest production risk — by email, from a human, within 2 business days.</p>
+<div class="card">
+<div id="quiz">
+<div class="qstep" data-step="1">
+<p><strong>1. What's your app built with?</strong></p>
+<p id="stack-opts"></p>
+</div>
+<div class="qstep" data-step="2" hidden>
+<p><strong>2. What scares you most right now?</strong></p>
+<p id="pain-opts"></p>
+</div>
+<div class="qstep" data-step="3" hidden>
+<p><strong>3. Where should I send your preliminary read?</strong></p>
+<p><input id="lead-url" type="url" inputmode="url" placeholder="https://your-app.com (optional)" maxlength="200" style="width:100%;max-width:28rem;padding:.6rem;border-radius:.5rem;border:1px solid var(--line2);background:#0B1426;color:var(--ink)"></p>
+<p><input id="lead-email" type="email" required placeholder="you@company.com" maxlength="254" style="width:100%;max-width:28rem;padding:.6rem;border-radius:.5rem;border:1px solid var(--line2);background:#0B1426;color:var(--ink)"></p>
+<p class="mut" style="font-size:.85rem"><input id="lead-consent" type="checkbox"> I agree to be emailed my assessment and one follow-up. No list, no spam — delete on request.</p>
+<p style="position:absolute;left:-9999px" aria-hidden="true"><input id="lead-website" type="text" tabindex="-1" autocomplete="off"></p>
+<p><button class="btn" id="lead-submit">Get my preliminary read</button> <button class="btn ghost" id="lead-back" type="button">Back</button></p>
+<p id="lead-msg" class="mut" role="status"></p>
+</div>
+<div id="quiz-done" hidden>
+<h3>Received.</h3>
+<p class="mut">Your preliminary read is on its way to your inbox. If it doesn't arrive within 2 business days, email <a href="mailto:devops@gabochie.com">devops@gabochie.com</a> directly.</p>
+</div>
+</div>
+</div>
+</section>
+
 <section id="process">
 <h2>Process</h2>
 <div class="grid c3">
@@ -111,7 +141,7 @@ welcome.</p>
 <section id="contact">
 <h2>Contact</h2>
 <div class="card"><p class="mut">Tell me your stack + URL + what scares you (checkout? auth? deploy?). First reply includes scope, fixed fee, and timeline. Prefer chat? WhatsApp available on request.</p>
-<p>Email: <a href="mailto:hello@gabochie.com">hello@gabochie.com</a> · GitHub: <a href="https://github.com/gabochie">gabochie</a></p></div>
+<p>Email: <a href="mailto:devops@gabochie.com">devops@gabochie.com</a> · GitHub: <a href="https://github.com/gabochie">gabochie</a></p></div>
 </section>
 </main>
 
@@ -124,6 +154,7 @@ welcome.</p>
 </div>
 <div class="fine"><span>© 2026 Gabochie DevOps · Hardening-first, evidence always</span><span>No trackers, no cookies — this site stores nothing about you.</span></div>
 </div></footer>
+<script src="/lead.js"></script>
 <script>
 fetch("/data/summary.json").then((r) => r.json()).then((d) => {
   const el = document.getElementById("proof-strip");
