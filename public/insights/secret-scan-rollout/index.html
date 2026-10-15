@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Four repos, fifteen historical secrets, zero live ones — Gabochie DevOps</title>
+<meta name="description" content="Rolling out secret scanning across a fleet: wrapper failures, token-free scanning, honest baselines.">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="/">Gabochie <b>DevOps</b></a>
+<nav class="main"><a href="/#work">Work</a><a href="/#assess">Free check</a><a href="/insights/">Insights</a></nav>
+</div></header>
+<main class="wrap"><section>
+<p class="kicker">2026-10-15 · Secret scanning · studio <a href="https://github.com/gabochie/studio-gabochie/pull/152">PR #152</a> · aiw <a href="https://github.com/gabochie/aiw/pull/2">PR #2</a></p>
+<h1>Four repos, fifteen historical secrets, zero live ones</h1>
+<div class="grid"><div class="card">
+<p>Rolling Gitleaks across four repos surfaced 15 real historical findings — Flutterwave keys, Stripe keys, a GCP key. The discipline that mattered wasn't the scan; it was what came after:</p>
+<p><strong>1. Never bless blind.</strong> Every finding was checked against HEAD (`git grep` + file reads) before entering a baseline. Two repos were already clean at HEAD; placeholders, not keys.</p>
+<p><strong>2. The wrapper betrayed us twice.</strong> First it demanded a token on PR events; then it needed PR API access that restricted-permission repos don't grant. The fix: run the Gitleaks binary directly — no API, no token, no permissions coupling. Identical file on all four repos.</p>
+<p><strong>3. Baselines are promises.</strong> Each `.gitleaksbaseline` commit message states counts: <em>12 historical, 0 live at HEAD</em>. A baseline you can't audit is just a suppressed alarm.</p>
+<p>The fleet procedure is written up as a reusable runbook — same one I'd run on your repo. <a href="/#assess">Start with the free check</a>.</p>
+</div></div>
+</section></main>
+<footer class="site"><div class="wrap"><div class="fine"><span>© 2026 Gabochie DevOps</span><span><a href="/">Home</a> · <a href="/insights/">Insights</a></span></div></div></footer>
+</body>
+</html>

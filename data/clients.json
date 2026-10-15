@@ -1,0 +1,20 @@
+{
+  "clients": [
+    {
+      "id": "demo-acme",
+      "label": "Demo Client — NOT A REAL ENGAGEMENT",
+      "stack": "Next.js",
+      "stage": "Hardening sprint",
+      "gate": { "done": 11, "total": 19 },
+      "findings": [
+        { "id": "F-001", "title": "Dashboard lists other users' orders (IDOR)", "severity": "Critical", "status": "fixed" },
+        { "id": "F-002", "title": ".env committed with live keys", "severity": "Critical", "status": "fixed" },
+        { "id": "F-003", "title": "No rate limit on login", "severity": "High", "status": "open" }
+      ],
+      "invoices": [
+        { "ref": "INV-DEMO-001", "item": "Readiness audit", "amountGHS": 1500.0, "status": "paid" },
+        { "ref": "INV-DEMO-002", "item": "Hardening sprint (deposit)", "amountGHS": 2000.0, "status": "pending" }
+      ]
+    }
+  ]
+}

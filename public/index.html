@@ -4,40 +4,118 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Gabochie DevOps — Vibe-coded apps to production-ready, with evidence</title>
-<meta name="description" content="Production-hardening for vibe-coded apps: readiness audits, hardening sprints, Ghana payments review, CI rescue.">
+<meta name="description" content="Production-hardening for vibe-coded apps: readiness audits, hardening sprints, Ghana payments review, CI rescue. Fixed quotes, evidence always.">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
 <header class="top"><div class="wrap">
-<span class="brand">Gabochie DevOps</span>
-<nav><a href="#services">Services</a><a href="#proof">Proof</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
+<a class="brand" href="/">Gabochie <b>DevOps</b></a>
+<button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('header.top').classList.toggle('nav-open')">☰</button>
+<nav class="main"><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#work">Work</a><a href="#assess">Free check</a><a href="/checklist/">Checklist</a><a href="/insights/">Insights</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main class="wrap">
 <section class="hero">
+<div class="hero-grid">
+<div>
 <p class="kicker">Vibe to production — with evidence, not promises</p>
 <h1>Your AI-built app, hardened to production-ready.</h1>
 <p class="lead">I take messy vibe-coded codebases → secure, tested, deployable operations. Every claim backed by
 a findings table, a 19-item readiness gate, and verification you can re-run. Ghana payments (MoMo, Flutterwave)
 welcome.</p>
-<a class="btn" href="#contact">Book a readiness audit</a>
-<a class="btn ghost" href="#proof">See the proof</a>
+<a class="btn" href="#assess">Get my free readiness check</a>
+<a class="btn ghost" href="#work">See the work</a>
+</div>
+<div>
+<svg class="pipe" viewBox="0 0 360 220" role="img" aria-label="Audit, approve, verify pipeline">
+<text x="16" y="24" fill="#C9A84C" font-size="12" letter-spacing="2">HOW EVERY ENGAGEMENT RUNS</text>
+<g font-size="14" fill="#E8EDF7">
+<rect x="16" y="44" width="100" height="120" rx="10" fill="#152642" stroke="#2E4570"/>
+<text x="30" y="80">🔍</text><text x="30" y="104">Audit</text><text x="30" y="124" font-size="11" fill="#9AA7C4">read-only</text><text x="30" y="142" font-size="11" fill="#9AA7C4">findings</text>
+<rect x="130" y="44" width="100" height="120" rx="10" fill="#152642" stroke="#2E4570"/>
+<text x="144" y="80">✅</text><text x="144" y="104">Approve</text><text x="144" y="124" font-size="11" fill="#9AA7C4">one item</text><text x="144" y="142" font-size="11" fill="#9AA7C4">at a time</text>
+<rect x="244" y="44" width="100" height="120" rx="10" fill="#152642" stroke="#C9A84C"/>
+<text x="258" y="80">🛡️</text><text x="258" y="104">Verify</text><text x="258" y="124" font-size="11" fill="#9AA7C4">tests re-run</text><text x="258" y="142" font-size="11" fill="#9AA7C4">gate signed</text>
+</g>
+<g stroke="#C9A84C" stroke-width="2"><line x1="116" y1="104" x2="130" y2="104"/><line x1="230" y1="104" x2="244" y2="104"/></g>
+<text x="16" y="196" font-size="12" fill="#9AA7C4">Nothing moves without your approval. Nothing ships without proof.</text>
+</svg>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><b>4</b><span>repos hardened end-to-end (PRs linked below)</span></div>
+<div class="stat"><b>15+</b><span>historical secrets found &amp; baselined, 0 live</span></div>
+<div class="stat"><b>1</b><span>CI dead since Oct 2, revived green</span></div>
+<div class="stat"><b>0</b><span>production edits without approval — ever</span></div>
+</div>
 </section>
 
 <section id="services">
 <h2>Services</h2>
 <div class="grid c3">
-<div class="card"><h3>Readiness Audit</h3><p class="mut">Read-only inspection: routes, auth, secrets, DB, tests, deploy. You get a severity-ranked findings table with file:line evidence — no edits, flat fee.</p></div>
-<div class="card"><h3>Hardening Sprint</h3><p class="mut">Riskiest-first fixes in small reversible diffs: authZ at the API layer, input validation, CI gates, rollback rehearsed. Staging before prod, always.</p></div>
-<div class="card"><h3>Payments + CI Rescue</h3><p class="mut">Ghana rails (MoMo pending states, webhook HMAC, idempotent finalize) and red-then-green CI pipelines. If your checkout or pipeline is scary, start here.</p></div>
+<div class="card"><h3>Readiness Audit</h3><p class="mut">Read-only inspection: routes, auth, secrets, DB, tests, deploy. You get a severity-ranked findings table with file:line evidence — no edits. 1–3 days.</p></div>
+<div class="card"><h3>Hardening Sprint</h3><p class="mut">Riskiest-first fixes in small reversible diffs: authZ at the API layer, input validation, CI gates, rollback rehearsed. Staging before prod, always. 1–2 weeks.</p></div>
+<div class="card"><h3>Payments + CI Rescue</h3><p class="mut">Ghana rails (MoMo pending states, webhook HMAC, idempotent finalize) and red-then-green CI pipelines. If your checkout or pipeline is scary, start here. Days, not months.</p></div>
+</div>
+</section>
+
+<section id="pricing">
+<h2>Pricing</h2>
+<p class="mut">Fixed fee, quoted upfront after a free 20-minute scoping call. No hourly billing, no surprise extras. Final amounts confirmed in writing before work starts.</p>
+<div class="grid c3">
+<div class="card"><h3>Audit</h3><p class="mut">Full findings table + readiness gate + remediation roadmap.</p><p><strong>Fixed fee</strong> · 1–3 days · you keep the report either way.</p></div>
+<div class="card featured"><h3>Sprint</h3><p class="mut">Audit + approved fixes, one bounded item at a time, verified green.</p><p><strong>Fixed fee per sprint</strong> · 1–2 weeks · rollback rehearsed.</p></div>
+<div class="card"><h3>Rescue</h3><p class="mut">Checkout or pipeline on fire? Triage first, stabilize, then harden.</p><p><strong>Scoped flat fee</strong> · starts within 48 hours.</p></div>
+</div>
+</section>
+
+<section id="work">
+<h2>Work — my own apps, hardened in public</h2>
+<p class="mut">No borrowed screenshots. Each card is my own repo, with the actual pull requests linked. This is the same pipeline I sell.</p>
+<div class="grid c3">
+<div class="card"><h3>studio-gabochie — secret history hunted down</h3><p class="mut">12 historical findings (Flutterwave + generic keys) → verified 0 live at HEAD → blessed baseline → CI green on branch, PR, and main.</p><p><a href="https://github.com/gabochie/studio-gabochie/pull/152">PR #152</a></p></div>
+<div class="card"><h3>sporafind — CI dead since Oct 2, revived</h3><p class="mut">Invalid YAML (zero-job runs), unquoted docker flag, version-fragile test. Fixed all three layers → 77 passed, main green.</p><p><a href="https://github.com/gabochie/sporafind/pull/3">PR #3</a></p></div>
+<div class="card"><h3>aiw — 3 historical leaks baselined</h3><p class="mut">Stripe + GCP keys in history, placeholders at HEAD → baseline → merged green.</p><p><a href="https://github.com/gabochie/aiw/pull/2">PR #2</a></p></div>
+<div class="card"><h3>KlagonOrg — scan + hygiene, main green</h3><p class="mut">Secret scan green, 5 tracked log files purged, full suite green on main.</p><p><a href="https://github.com/gabochie/KlagonOrg/pull/28">PR #28</a> · <a href="https://github.com/gabochie/KlagonOrg/pull/29">PR #29</a></p></div>
 </div>
 </section>
 
 <section id="proof">
-<h2>Proof, live from my own hardening queue</h2>
-<p class="mut">This strip is generated from my working repos — same pipeline I sell. Updated on every push.</p>
+<h2>Live pipeline stats</h2>
+<p class="mut">Generated from my working repos on every data refresh — same pipeline I sell.</p>
 <div id="proof-strip" class="grid c3"></div>
+</section>
+
+<section id="assess">
+<h2>Free 60-second readiness check</h2>
+<p class="sub">Answer three questions. Get a preliminary read on your biggest production risk — by email, from a human, within 2 business days.</p>
+<div class="card">
+<div id="quiz">
+<div class="qstep" data-step="1">
+<p><strong>1. What's your app built with?</strong></p>
+<p id="stack-opts"></p>
+</div>
+<div class="qstep" data-step="2" hidden>
+<p><strong>2. What scares you most right now?</strong></p>
+<p id="pain-opts"></p>
+</div>
+<div class="qstep" data-step="3" hidden>
+<p><strong>3. Where should I send your preliminary read?</strong></p>
+<p><input id="lead-url" type="url" inputmode="url" placeholder="https://your-app.com (optional)" maxlength="200" style="width:100%;max-width:28rem;padding:.6rem;border-radius:.5rem;border:1px solid var(--line2);background:#0B1426;color:var(--ink)"></p>
+<p><input id="lead-email" type="email" required placeholder="you@company.com" maxlength="254" style="width:100%;max-width:28rem;padding:.6rem;border-radius:.5rem;border:1px solid var(--line2);background:#0B1426;color:var(--ink)"></p>
+<p class="mut" style="font-size:.85rem"><input id="lead-consent" type="checkbox"> I agree to be emailed my assessment and one follow-up. No list, no spam — delete on request.</p>
+<p style="position:absolute;left:-9999px" aria-hidden="true"><input id="lead-website" type="text" tabindex="-1" autocomplete="off"></p>
+<p><button class="btn" id="lead-submit">Get my preliminary read</button> <button class="btn ghost" id="lead-back" type="button">Back</button></p>
+<p id="lead-msg" class="mut" role="status"></p>
+</div>
+<div id="quiz-done" hidden>
+<h3>Received.</h3>
+<p class="mut">Your preliminary read is on its way to your inbox. If it doesn't arrive within 2 business days, email <a href="mailto:devops@gabochie.com">devops@gabochie.com</a> directly.</p>
+</div>
+</div>
+</div>
 </section>
 
 <section id="process">
@@ -49,14 +127,34 @@ welcome.</p>
 </div>
 </section>
 
+<section id="faq">
+<h2>FAQ</h2>
+<div class="grid">
+<div class="card"><h3>Will you rewrite my app?</h3><p class="mut">No. Preserve-what-works is the rule: smallest reversible diffs, public interfaces unchanged unless evidence demands it.</p></div>
+<div class="card"><h3>What do you need from me?</h3><p class="mut">Repo access, a staging environment (or permission to create one), and 30 minutes for scoping. I never need your production secrets — names only.</p></div>
+<div class="card"><h3>Which stacks?</h3><p class="mut">Next.js, Node APIs, Python, PHP/Laravel, WordPress, Cloudflare edge, static sites. If it's vibe-coded and web, I can audit it.</p></div>
+<div class="card"><h3>What if you find something bad?</h3><p class="mut">You hear it first, with severity, impact, and the exact fix — before anything changes. Leaked live keys get rotated immediately, with you.</p></div>
+<div class="card"><h3>How do I know it worked?</h3><p class="mut">The same gates re-run after every fix, on staging first. Green is demonstrated, not declared — and remaining risks are listed, not hidden.</p></div>
+</div>
+</section>
+
 <section id="contact">
-<h2>Contact</h2>
-<div class="card"><p class="mut">Tell me your stack + URL + what scares you (checkout? auth? deploy?). First reply includes scope, flat fee, and timeline.</p>
-<p>Email: <a href="mailto:hello@gabochie.com">hello@gabochie.com</a> · GitHub: <a href="https://github.com/gabochie">gabochie</a></p></div>
+<h2>Start with the free check</h2>
+<div class="card"><p class="mut">Three questions, two minutes, zero commitment. Or grab the <a href="/checklist/">19-item checklist</a> and score yourself first. Either way, the first reply includes scope, fixed fee, and timeline.</p>
+<p>Email: <a href="mailto:devops@gabochie.com">devops@gabochie.com</a> · GitHub: <a href="https://github.com/gabochie">gabochie</a></p></div>
 </section>
 </main>
 
-<footer><div class="wrap">© 2026 Gabochie DevOps · Hardening-first, evidence always · <a href="/app/">Console</a></div></footer>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<div><a class="brand" href="/">Gabochie <b>DevOps</b></a><p>Vibe-coded apps to production-ready, with evidence. Accra · Remote worldwide.</p></div>
+<div><h4>Services</h4><nav><a href="#services">Readiness audit</a><a href="#services">Hardening sprint</a><a href="#services">Payments + CI rescue</a></nav></div>
+<div><h4>Proof</h4><nav><a href="#work">Case work</a><a href="#proof">Live stats</a><a href="/app/">Console</a><a href="https://github.com/gabochie">GitHub</a></nav></div>
+<div><h4>Fine print</h4><nav><a href="/legal/privacy.html">Privacy</a><a href="/legal/terms.html">Terms</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav></div>
+</div>
+<div class="fine"><span>© 2026 Gabochie DevOps · Hardening-first, evidence always</span><span>No trackers, no cookies — this site stores nothing about you.</span></div>
+</div></footer>
+<script src="/lead.js"></script>
 <script>
 fetch("/data/summary.json").then((r) => r.json()).then((d) => {
   const el = document.getElementById("proof-strip");

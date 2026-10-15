@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your project — Gabochie DevOps</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/app/app.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="/">Gabochie <b>DevOps</b></a></div></header>
+<main class="wrap"><section>
+<p class="kicker">Private client page — this link is your login, don't share it</p>
+<h1 id="c-title">Loading…</h1>
+<p class="mut" id="c-meta"></p>
+<div class="bar big"><i id="c-gate" style="width:0%"></i></div>
+<h2>Findings</h2>
+<table><thead><tr><th>ID</th><th>Finding</th><th>Severity</th><th>Status</th></tr></thead><tbody id="c-findings"></tbody></table>
+<h2>Invoices</h2>
+<table><thead><tr><th>Ref</th><th>Item</th><th>Amount (GHS)</th><th>Status</th><th></th></tr></thead><tbody id="c-invoices"></tbody></table>
+<p id="c-err" class="err"></p>
+</section></main>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const err = (m) => { document.getElementById("c-err").textContent = m; document.getElementById("c-title").textContent = "Link invalid"; };
+  try {
+    const r = await fetch(`/api/client?id=${encodeURIComponent(q.get("id") || "")}&exp=${encodeURIComponent(q.get("exp") || "")}&token=${encodeURIComponent(q.get("token") || "")}`, { cache: "no-store" });
+    if (!r.ok) return err(r.status === 401 ? "This link expired — request a fresh one." : "Couldn't load your page.");
+    const { record } = await r.json();
+    document.getElementById("c-title").textContent = record.label;
+    document.getElementById("c-meta").textContent = `${record.stack} · ${record.stage}`;
+    const pct = Math.round((record.gate.done / record.gate.total) * 100);
+    document.getElementById("c-gate").style.width = pct + "%";
+    document.getElementById("c-gate").parentElement.title = `${record.gate.done}/${record.gate.total}`;
+    document.getElementById("c-findings").innerHTML = record.findings.map((f) =>
+      `<tr><td>${f.id}</td><td>${f.title}</td><td>${f.severity}</td><td><span class="pill ${f.status === "fixed" ? "done" : "open"}">${f.status}</span></td></tr>`).join("");
+    document.getElementById("c-invoices").innerHTML = record.invoices.map((v) =>
+      `<tr><td>${v.ref}</td><td>${v.item}</td><td>${Number(v.amountGHS).toFixed(2)}</td>` +
+      `<td><span class="pill ${v.status === "paid" ? "done" : "open"}">${v.status}</span></td>` +
+      `<td>${v.status === "pending" ? `<button data-pay="${v.ref}">Pay</button>` : ""}</td></tr>`).join("");
+    document.querySelectorAll("[data-pay]").forEach((btn) => btn.addEventListener("click", async () => {
+      btn.disabled = true;
+      try {
+        const pr = await fetch("/api/deposit", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ clientId: record.id, token: q.get("token"), exp: q.get("exp"), invoiceRef: btn.dataset.pay }) });
+        const d = await pr.json();
+        if (pr.ok && d.checkoutUrl) location.href = d.checkoutUrl;
+        else document.getElementById("c-err").textContent = "Payments aren't live yet — you'll be notified.";
+      } catch { document.getElementById("c-err").textContent = "Network hiccup — try again."; }
+      btn.disabled = false;
+    }));
+  } catch { err("Network hiccup — try again."); }
+})();
+</script>
+</body>
+</html>

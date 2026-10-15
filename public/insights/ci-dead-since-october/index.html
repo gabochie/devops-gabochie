@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CI dead since Oct 2: four layered bugs, one green main — Gabochie DevOps</title>
+<meta name="description" content="How a red pipeline hid behind green badges: invalid YAML, docker flags, FastAPI lazy routers.">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="/">Gabochie <b>DevOps</b></a>
+<nav class="main"><a href="/#work">Work</a><a href="/#assess">Free check</a><a href="/insights/">Insights</a></nav>
+</div></header>
+<main class="wrap"><section>
+<p class="kicker">2026-10-15 · CI rescue · <a href="https://github.com/gabochie/sporafind/pull/3">PR #3</a></p>
+<h1>CI dead since Oct 2: four layered bugs, one green main</h1>
+<div class="grid"><div class="card">
+<p>A client's CI looked healthy — green badges on the default branch. It wasn't. Every push ran zero jobs, and nobody noticed, because a <em>different</em> workflow stayed green. Here's the stack of failures I peeled apart:</p>
+<p><strong>1. Invalid YAML, zero jobs.</strong> A `python -c` block lost its indentation in an edit. YAML parsers reject the file; GitHub schedules the run, creates no jobs, marks failure. Invisible unless you open the run.</p>
+<p><strong>2. Unquoted docker flag.</strong> `--health-cmd pg_isready -U postgres` — docker parsed `-U` as its own flag (exit 125). One pair of quotes.</p>
+<p><strong>3. My own bad fix.</strong> I re-indented the block flat and broke Python semantics. CI caught it in minutes — which is exactly what CI is for, including against me.</p>
+<p><strong>4. The real find.</strong> With the pipeline finally running: 77 passed, 1 failed. The failing test introspected `app.routes` — but FastAPI ≥0.14 stores included routers lazily (`_IncludedRouter`, verified in installed source). The app was always fine; the test was version-fragile. Fixed via `app.openapi()["paths"]`, green on FastAPI 0.135 <em>and</em> 0.143.</p>
+<p><strong>Lesson I now sell:</strong> unpinned dependency ranges plus a CI suite that never actually executes equals silent rot. Pin the lesson, not just the versions.</p>
+<p><a class="btn" href="/#assess">Is your CI actually running? Get a free check</a></p>
+</div></div>
+</section></main>
+<footer class="site"><div class="wrap"><div class="fine"><span>© 2026 Gabochie DevOps</span><span><a href="/">Home</a> · <a href="/insights/">Insights</a></span></div></div></footer>
+</body>
+</html>
