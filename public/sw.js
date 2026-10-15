@@ -1,7 +1,7 @@
 // Read-only offline shell. NEVER cache /api/*, /data/*.json is stale-OK, money pages don't exist here.
 const SW_VERSION = "v1";
 const CACHE = "devops-" + SW_VERSION;
-const ALLOW = ["/", "/offline.html", "/app/", "/styles.css", "/app/app.css"];
+const ALLOW = ["/", "/offline.html", "/app/", "/styles.css", "/app/app.css", "/favicon.svg", "/icons/icon-192.png", "/icons/icon-512.png"];
 const DENY = ["/api/", "/admin/"];
 
 self.addEventListener("install", (e) => {
