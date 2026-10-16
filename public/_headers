@@ -1,3 +1,10 @@
+/os/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://buildcostgh.com https://www.sporafind.com https://studio.gabochie.com https://ghbc.gabochie.com https://devops.gabochie.com https://mywa.gabochie.com; frame-ancestors 'none'
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
 /*
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Frame-Options: DENY
