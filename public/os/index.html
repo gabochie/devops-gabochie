@@ -132,34 +132,67 @@ el.innerHTML=`<div style="display:flex;justify-content:space-between"><h2>${x.t}
 el.classList.add('show');el.scrollIntoView({behavior:'smooth'});
 }
 function showExecute(){
-const P=[["P1 Push — make GitHub match local",["Push web D1 fix","Push trilogy docs (buildcostgh/ghbc/mywa)","Push mywa/ai-builder/gtpm/Gh2047/green/beth","Confirm GitHub shows 15 commits"]],["P2 Prove — screenshots + Looms",["Screenshot 6 lives","Record 3×60s Looms","Append proof to READMEs + dashboard","Update devops.gabochie.com/featured"]],["P3 Profile — look $35/hr",["LinkedIn headline+banner+featured","Pin 5 repos on GitHub","Upwork 3 Projects live","Delete 11 no-git clutter folders"]],["P4 Prospect — paid pilots",["10 contractor DMs + demo","10 realtor DMs + 100 free","5 firm pilots + index","Track 161+ leads, close 1"]]];
-const AUTO=[["auto-live","6 lives responding 200"],["auto-audit","Nightly audit loop green (metrics.json)"],["auto-guard","Secrets guard passing (no .env, 0 placeholders)"]];
-let done=JSON.parse(localStorage.getItem("gab_exec")||"{}");
+const SHOWCASE=["buildcostgh","sporafind","GhBuildingCode","mywa","gtpm","web.gabochie.com","lutterodt","studio-gabochie"];
+const PROOF=["buildcostgh","mywa","GhBuildingCode"];
+const HUMAN=["LinkedIn headline + banner + featured (human: your account)","Upwork 3 Projects live (human: your account)","DM pilots — contractors / realtors / firms (human: your voice)","Record 3×60s Looms (human: your face)"];
 let auto=JSON.parse(localStorage.getItem("gab_auto")||"{}");
-const total=P.reduce((a,p)=>a+p[1].length,0), dc=Object.values(done).filter(Boolean).length, pct=Math.round(dc/total*100);
+let sec=JSON.parse(localStorage.getItem("gab_sec")||"{}");
+const keys=["live","feed","flow","public","push","proof"];
+const n=keys.filter(k=>auto[k]&&auto[k].ok===true).length, pct=Math.round(n/keys.length*100);
 const tick=(ok)=>ok===true?"✅":ok===false?"❌":"⏳";
-document.getElementById('static').innerHTML=`<div class="detail show"><h2>▶ Execute — ${dc}/${total} manual (${pct}%)</h2><div style="background:#0c1330;border-radius:10px;height:14px;overflow:hidden"><div style="width:${pct}%;height:100%;background:linear-gradient(90deg,#6366f1,#22c55e)"></div></div>
-<h3>🤖 Auto gates — verified live, crossed out by events <button class="btn ghost" onclick="runAutoVerify()">Run auto-verify</button> <small style="color:var(--mut)">${auto.ts?"last: "+auto.ts:"never run"}</small></h3>
-${AUTO.map(a=>`<div class="sellbox">${tick(auto[a[0]]&&auto[a[0]].ok)} <b>${a[1]}</b>${auto[a[0]]&&auto[a[0]].detail?" — <small>"+auto[a[0]].detail+"</small>":""}</div>`).join("")}
-${P.map((ph,pi)=>`<h3>${ph[0]} — ${ph[1].filter((_,ti)=>done[pi+"-"+ti]).length}/${ph[1].length} (manual)</h3>${ph[1].map((t,ti)=>{const k=pi+"-"+ti;return `<label style="display:flex;gap:10px;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0;cursor:pointer"><input type="checkbox" ${done[k]?"checked":""} onchange="toggleExec('${k}')" style="width:18px;height:18px"><span style="${done[k]?"text-decoration:line-through;opacity:.6":""}">${t}</span></label>`}).join("")}`).join("")}
+const row=(k,label)=>`<div class="sellbox">${tick(auto[k]&&auto[k].ok)} <b>${label}</b>${auto[k]&&auto[k].detail?" — <small>"+auto[k].detail+"</small>":""}</div>`;
+document.getElementById('static').innerHTML=`<div class="detail show"><h2>▶ Execute — ${n}/${keys.length} auto-verified (${pct}%)</h2><div style="background:#0c1330;border-radius:10px;height:14px;overflow:hidden"><div style="width:${pct}%;height:100%;background:linear-gradient(90deg,#6366f1,#22c55e)"></div></div>
+<h3>🤖 Event-driven — system verifies, you only do security <button class="btn ghost" onclick="runAutoVerify()">Run auto-verify</button> <small style="color:var(--mut)">${auto.ts?"last: "+auto.ts:"never run"}</small></h3>
+${row("live","6 lives responding")}${row("feed","Audit feed fresh + green")}${row("flow","Nightly audit succeeding")}${row("public","8 showcase repos public")}${row("push","Showcase pushes on GitHub (Oct 16+)")}${row("proof","README proof blocks live")}
+<h3>🔒 Security gate — human only <label style="display:flex;gap:10px;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0;cursor:pointer"><input type="checkbox" ${sec.del?"checked":""} onchange="toggleSec()" style="width:18px;height:18px"><span style="${sec.del?"text-decoration:line-through;opacity:.6":""}">I reviewed + deleted the 11 no-git clutter folders (deletes are irreversible)</span></label></h3>
+<h3>🧍 Human lane — no ticks needed, excluded from %</h3>${HUMAN.map(h=>`<div class="fixbox">${h}</div>`).join("")}
 <p><button class="btn ghost" onclick="localStorage.removeItem('gab_exec');showExecute()">Reset</button> Progress saves in this browser.</p><h3>🤖 Autonomy — supervised, not self-driving</h3><div class="fixbox"><b>Now:</b> checklist + you click. Pieces exist (vibe-toolkit gates, MVP runbook, sales Demo/Dry/Live) but not wired here.<br><b>Safe to automate:</b> status scans, live checks, screenshot capture, README proof-checks.<br><b>Never automate:</b> push, deploys, deletes, DMs, posts, billing, lead data — human approve every time.<br><b>Professional =</b> every claim has file:line evidence + green gate re-run + rollback plan. Automate proof capture, not promises.<br><b>To enable:</b> 1) secrets in env, 2) Demo→Dry→Live modes, 3) verify gates + rollback, 4) audit log. Scope +8-12h upfront, then 10x speed.</div>
 <div class="sellbox"><b>Demo scan ✅ Oct 16 12:10 (read-only, file: demo-scan.ps1):</b> Dirty 2 by design (DBGabochie 3 private, freellmapi 2 third-party). D1 placeholders 0 in fixed files; new finds: lutterodt preview DB/KV (2), calcgh Flutterwave test fallback (1). Lives 6/6 listed for check. Next: Dry-mode (diffs only, no apply).</div>
 <div class="sellbox"><b>Gate 1 ✅ APPLIED + PUSHED Oct 16:</b> Guards committed + pushed (mywa ec3e185, aec 601aa85 → new PRIVATE gabochie/aec-command-center). Compose fail-loud on JWT/ENCRYPTION_KEY. <b>Push wave ✅:</b> all 14 in sync — web, buildcostgh, ghbc, gtpm, Gh2047, green, beth (remote fixed), GDFII, airevops, plf, ai-builder. New repos private; flip showcase ones public when ready.</div>
 <div class="sellbox"><b>Gate 3 ✅ LIVE Oct 16 (95a0f50, pushed):</b> True loop running — scripts/audit.mjs checks 6 lives + placeholders + .env guard, appends data/audit-log.jsonl, updates data/metrics.json. First run: 100% live, 0 placeholders, guard pass. Schedule: Sun 06:00 UTC + manual dispatch; commits only data/*.json. Weekly numbers: live %, placeholders, guard. Feed public ✅ metrics.json readable (100/0/pass). First Actions run ✅ success 16s Oct 16 (workflow_dispatch). Both checkouts synced.</div>
 <div class="fixbox"><b>Dry-mode diff — lutterodt preview (NOT applied Oct 16):</b><br>Prod OK: D1 97d98aca… + KV 260a… real. Preview has 2 placeholders → PR previews fail, prod fine.<br>Proposed diff: comment out env.preview block (6 lines) + note “preview disabled — D1 limit”. Zero cloud changes, zero prod risk. Say GO to apply.</div></div>`;
 }
-function toggleExec(k){let d=JSON.parse(localStorage.getItem("gab_exec")||"{}");d[k]=!d[k];localStorage.setItem("gab_exec",JSON.stringify(d));showExecute()}
+function toggleSec(){let s=JSON.parse(localStorage.getItem("gab_sec")||"{}");s.del=!s.del;localStorage.setItem("gab_sec",JSON.stringify(s));showExecute()}
 async function runAutoVerify(){
+const SHOWCASE=["buildcostgh","sporafind","GhBuildingCode","mywa","gtpm","web.gabochie.com","lutterodt","studio-gabochie"];
+const PROOF=["buildcostgh","mywa","GhBuildingCode"];
 const LIVES=["https://buildcostgh.com","https://www.sporafind.com","https://studio.gabochie.com","https://ghbc.gabochie.com","https://devops.gabochie.com","https://mywa.gabochie.com"];
 const auto=JSON.parse(localStorage.getItem("gab_auto")||"{}");
-const ping=async(u)=>{try{const c=new AbortController();const t=setTimeout(()=>c.abort(),12000);await fetch(u,{mode:"no-cors",signal:c.signal});clearTimeout(t);return true}catch(e){return false}};
+const j=async(u)=>{const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error(r.status);return r.json()};
+const t=async(u)=>{const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error(r.status);return r.text()};
+const ping=async(u)=>{try{const c=new AbortController();const s=setTimeout(()=>c.abort(),12000);await fetch(u,{mode:"no-cors",signal:c.signal});clearTimeout(s);return true}catch(e){return false}};
+// 1. lives
 const ups=await Promise.all(LIVES.map(ping));const n=ups.filter(Boolean).length;
-auto["auto-live"]={ok:n===LIVES.length,detail:n+"/"+LIVES.length+" reachable"};
+auto.live={ok:n===LIVES.length,detail:n+"/"+LIVES.length+" reachable"};
+// 2+3. audit feed (fresh <8d + green)
 try{
-const m=await (await fetch("https://raw.githubusercontent.com/gabochie/devops-gabochie/master/data/metrics.json",{cache:"no-store"})).json();
-auto["auto-audit"]={ok:m.live_pct===100,detail:"live "+m.live_pct+"% · "+m.updated.slice(0,10)};
-auto["auto-guard"]={ok:m.guard_pass===true&&m.placeholders===0,detail:"placeholders "+m.placeholders+" · guard "+(m.guard_pass?"pass":"FAIL")};
-}catch(e){auto["auto-audit"]={ok:false,detail:"metrics.json unreachable"};auto["auto-guard"]={ok:null,detail:"waiting on audit feed"}}
+const m=await j("https://raw.githubusercontent.com/gabochie/devops-gabochie/master/data/metrics.json");
+const fresh=(Date.now()-new Date(m.updated).getTime())<8*864e5;
+auto.feed={ok:fresh&&m.live_pct===100,detail:"live "+m.live_pct+"% · "+String(m.updated).slice(0,10)};
+auto.guard={ok:m.guard_pass===true&&m.placeholders===0,detail:"placeholders "+m.placeholders+" · guard "+(m.guard_pass?"pass":"FAIL")};
+}catch(e){auto.feed={ok:false,detail:"metrics.json unreachable"};auto.guard={ok:null,detail:"waiting on audit feed"}}
+// 4. workflow succeeding (public repo)
+try{
+const r=await j("https://api.github.com/repos/gabochie/devops-gabochie/actions/runs?per_page=1");
+const w=r.workflow_runs[0];
+auto.flow={ok:w&&(w.conclusion==="success"||w.status==="in_progress"),detail:w?w.name+" "+(w.conclusion||w.status):"no runs"};
+}catch(e){auto.flow={ok:null,detail:"actions API unreachable (rate limit?)"}}
+// 5+6. showcase visibility + pushes + proof (public repos only; private = blocked, flip to unlock)
+const pub=[],priv=[];
+for(const name of SHOWCASE){
+try{
+const r=await j("https://api.github.com/repos/gabochie/"+name);
+if(r.private){priv.push(name)}else{pub.push({name,branch:r.default_branch,pushed:r.pushed_at})}
+}catch(e){priv.push(name+"?")}
+}
+auto.public={ok:priv.length===0,detail:priv.length?("private: "+priv.join(", ")):(pub.length+" public")};
+const freshOk=pub.filter(p=>p.pushed&&p.pushed>="2026-10-16");
+auto.push={ok:pub.length>0&&freshOk.length===pub.length,detail:freshOk.length+"/"+pub.length+" pushed Oct16+"+(priv.length?" · private skipped: "+priv.join(", "):"")};
+let proofOk=[],proofMiss=[];
+for(const p of pub.filter(p=>PROOF.includes(p.name))){
+try{const body=await t("https://raw.githubusercontent.com/gabochie/"+p.name+"/"+p.branch+"/README.md");(body.includes("Live Demo")?proofOk:proofMiss).push(p.name)}catch(e){proofMiss.push(p.name+"?")}
+}
+auto.proof={ok:proofOk.length>0&&proofMiss.length===0,detail:proofOk.length?("proof in: "+proofOk.join(", ")):"no public proof yet"+(proofMiss.length?" · missing: "+proofMiss.join(", "):"")};
 auto.ts=new Date().toISOString().slice(0,16).replace("T"," ");
 localStorage.setItem("gab_auto",JSON.stringify(auto));showExecute();
 }
