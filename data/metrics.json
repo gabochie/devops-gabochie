@@ -1,0 +1,44 @@
+{
+  "updated": "2026-10-16T12:38:52.292Z",
+  "live_pct": 100,
+  "placeholders": 0,
+  "guard_pass": true,
+  "lives": [
+    {
+      "url": "https://buildcostgh.com",
+      "ok": true,
+      "status": 200,
+      "ms": 716
+    },
+    {
+      "url": "https://www.sporafind.com",
+      "ok": true,
+      "status": 200,
+      "ms": 353
+    },
+    {
+      "url": "https://studio.gabochie.com",
+      "ok": true,
+      "status": 200,
+      "ms": 408
+    },
+    {
+      "url": "https://ghbc.gabochie.com",
+      "ok": true,
+      "status": 200,
+      "ms": 221
+    },
+    {
+      "url": "https://devops.gabochie.com",
+      "ok": true,
+      "status": 200,
+      "ms": 186
+    },
+    {
+      "url": "https://mywa.gabochie.com",
+      "ok": true,
+      "status": 200,
+      "ms": 225
+    }
+  ]
+}

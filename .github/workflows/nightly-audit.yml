@@ -1,0 +1,26 @@
+# Gate 3: nightly agentic audit — read-only checks, commits only data/*.json
+# Schedule: Sundays 06:00 UTC + manual dispatch. No deploys, no secrets required.
+name: nightly-audit
+on:
+  schedule:
+    - cron: "0 6 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/audit.mjs --write
+      - run: |
+          git config user.name "gabochie-audit"
+          git config user.email "audit@gabochie.com"
+          git add data/audit-log.jsonl data/metrics.json
+          git diff --cached --quiet || git commit -m "chore(audit): weekly gate $(date -u +%F)"
+          git push
