@@ -65,6 +65,15 @@ welcome.</p>
 </div>
 </section>
 
+<section id="founder">
+<h2>The engineer</h2>
+<div class="grid c3">
+<div class="card featured"><p><img src="/icons/founder.png" alt="Gideon A. Bochie" width="120" height="120" style="border-radius:50%;object-fit:cover"></p><h3>Gideon A. Bochie</h3><p class="mut">Solutions Architect &amp; Full-Stack Engineer · Ex-architect · Accra, remote worldwide</p><p><a href="https://github.com/gabochie">GitHub</a> · <a href="https://www.linkedin.com/in/gabochie">LinkedIn</a></p></div>
+<div class="card"><h3>Built like a building</h3><p class="mut">Ten years designing structures that cannot fail taught me to design software the same way: load paths, safety margins, inspections. I treat code architecture with the discipline of real-world buildings.</p></div>
+<div class="card"><h3>Agentic by default</h3><p class="mut">I don't just write automation — I run autonomous agents under policy guardrails that watch my fleet weekly, file findings, and wait for my approval. See <a href="#agents">agentic ops</a>.</p></div>
+</div>
+</section>
+
 <section id="services">
 <h2>Services</h2>
 <div class="grid c3">
@@ -76,7 +85,7 @@ welcome.</p>
 
 <section id="pricing">
 <h2>Pricing</h2>
-<p class="mut">Fixed fee, quoted upfront after a free 20-minute scoping call. No hourly billing, no surprise extras. Final amounts confirmed in writing before work starts. Why no price list? Every codebase differs — a number without looking at your app would be a guess, and I don't sell guesses.</p>
+<p class="mut">Fixed fee, quoted upfront after a free 20-minute scoping call. No hourly billing, no surprise extras. Final amounts confirmed in writing before work starts. Why no price list? Every codebase differs — a number without looking at your app would be a guess, and I don't sell guesses. For orientation: recent fixed-price builds landed between <strong>$900 and $2,200</strong>.</p>
 <div class="grid c3">
 <div class="card"><h3>Audit</h3><p class="mut">Full findings table + readiness gate + remediation roadmap.</p><p><strong>Fixed fee</strong> · 1–3 days · you keep the report either way.</p></div>
 <div class="card featured"><h3>Sprint</h3><p class="mut">Audit + approved fixes, one bounded item at a time, verified green.</p><p><strong>Fixed fee per sprint</strong> · 1–2 weeks · rollback rehearsed.</p></div>
@@ -92,6 +101,16 @@ welcome.</p>
 <div class="card"><h3>sporafind — CI dead since Oct 2, revived</h3><p class="mut">Invalid YAML (zero-job runs), unquoted docker flag, version-fragile test. Fixed all three layers → 77 passed, main green.</p><p><a href="https://github.com/gabochie/sporafind/pull/3">PR #3</a></p></div>
 <div class="card"><h3>aiw — 3 historical leaks baselined</h3><p class="mut">Stripe + GCP keys in history, placeholders at HEAD → baseline → merged green.</p><p><a href="https://github.com/gabochie/aiw/pull/2">PR #2</a></p></div>
 <div class="card"><h3>KlagonOrg — scan + hygiene, main green</h3><p class="mut">Secret scan green, 5 tracked log files purged, full suite green on main.</p><p><a href="https://github.com/gabochie/KlagonOrg/pull/28">PR #28</a> · <a href="https://github.com/gabochie/KlagonOrg/pull/29">PR #29</a></p></div>
+</div>
+</section>
+
+<section id="agents">
+<h2>Agentic ops, not just hardening</h2>
+<p class="mut">Hardening fixes today's app. Agents guard tomorrow's. A scheduled audit loop watches 6 production apps weekly — uptime, secrets, placeholders — appends signed findings to an audit log, and waits for my approval. Nothing self-deploys, everything self-reports.</p>
+<div class="grid c3">
+<div class="card"><h3>Triage agent</h3><p class="mut">Nightly checks across the fleet with severity-ranked findings and run history. Read the <a href="/insights/triage-agent/">field notes</a>.</p></div>
+<div class="card"><h3>Policy guardrails</h3><p class="mut">Secret scanners, fail-loud boot, token-gated consoles, approve-before-prod. Dangerous commands die at the gate — <a href="/insights/policy-guardrails/">how they're built</a>.</p></div>
+<div class="card"><h3>Live audit feed</h3><p class="mut">Machine-readable proof, refreshed weekly: <a href="https://github.com/gabochie/devops-gabochie/blob/master/data/metrics.json">metrics.json</a> · <a href="https://github.com/gabochie/devops-gabochie/blob/master/data/audit-log.jsonl">audit log</a>.</p></div>
 </div>
 </section>
 

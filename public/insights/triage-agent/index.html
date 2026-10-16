@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My triage agent watches 6 apps while I sleep — Gabochie DevOps</title>
+<meta name="description" content="A scheduled audit loop checks six production apps weekly, files signed findings, and waits for approval. Nothing self-deploys; everything self-reports.">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="/">Gabochie <b>DevOps</b></a>
+<nav class="main"><a href="/#work">Work</a><a href="/#assess">Free check</a><a href="/insights/">Insights</a></nav>
+</div></header>
+<main class="wrap"><section>
+<p class="kicker">2026-10-16 · Agentic ops · <a href="https://github.com/gabochie/devops-gabochie/blob/master/scripts/audit.mjs">scripts/audit.mjs</a> · <a href="https://github.com/gabochie/devops-gabochie/blob/master/data/audit-log.jsonl">audit log</a></p>
+<h1>My triage agent watches 6 apps while I sleep</h1>
+<div class="grid"><div class="card">
+<p>Every Sunday at 06:00 UTC, a scheduled loop opens six production apps, checks uptime, scans for secret placeholders, verifies no <code>.env</code> is tracked — then appends a signed entry to an audit log and updates a machine-readable <code>metrics.json</code>. First run: 100% live, 0 placeholders, guard pass, 16 seconds.</p>
+<p><strong>1. Read-only by construction.</strong> The loop's only write targets are its own log files. It cannot deploy, cannot merge, cannot touch your data. The blast radius of a bug is one JSON line.</p>
+<p><strong>2. Findings, not fixes.</strong> Like a structural inspector, it reports cracks; it never pours concrete. Every entry carries a timestamp, severity inputs, and a human decision slot. I approve; it never does.</p>
+<p><strong>3. Proof clients can re-run.</strong> The same script runs on your machine with <code>node scripts/audit.mjs</code> — dry by default, <code>--write</code> only when you say so. Green is demonstrated, not declared. <a href="/#assess">Start with the free check</a>.</p>
+</div></div>
+</section></main>
+<footer class="site"><div class="wrap"><div class="fine"><span>© 2026 Gabochie DevOps</span><span><a href="/">Home</a> · <a href="/insights/">Insights</a></span></div></div></footer>
+</body>
+</html>
