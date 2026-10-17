@@ -1,0 +1,10 @@
+{
+  "mode": "demo",
+  "changed": "2026-10-17",
+  "meaning": {
+    "demo": "nothing mutating runs outside this repo's own data/*.json; external repos and cloud are read-only",
+    "dry": "diffs and plans only; never applied to other repos or cloud",
+    "live": "writes allowed, one human-approved action at a time"
+  },
+  "rule": "Scripts call assertLive() before any external write. Flipping this file is a human act: edit + commit. Missing file = demo."
+}

@@ -5,10 +5,12 @@ import { execSync } from "node:child_process";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { getMode } from "./mode.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "data");
 const WRITE = process.argv.includes("--write");
+const MODE = getMode();
 
 const LIVES = [
   "https://buildcostgh.com",
@@ -53,6 +55,7 @@ const guardPass = envTracked.length === 0;
 const entry = {
   ts: new Date().toISOString(),
   mode: WRITE ? "scheduled" : "dry",
+  fleet_mode: MODE,
   live_pct: livePct,
   live: results.map((r) => ({ url: r.url, ok: r.ok, status: r.status, ms: r.ms })),
   placeholders,
@@ -67,7 +70,7 @@ if (WRITE) {
   appendFileSync(join(DATA, "audit-log.jsonl"), JSON.stringify(entry) + "\n");
   writeFileSync(
     join(DATA, "metrics.json"),
-    JSON.stringify({ updated: entry.ts, live_pct: livePct, placeholders: placeholders.length, guard_pass: guardPass, lives: entry.live }, null, 2) + "\n"
+    JSON.stringify({ updated: entry.ts, fleet_mode: MODE, live_pct: livePct, placeholders: placeholders.length, guard_pass: guardPass, lives: entry.live }, null, 2) + "\n"
   );
   console.log("wrote data/audit-log.jsonl + data/metrics.json");
 } else {
