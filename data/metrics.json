@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T08:56:26.026Z",
+  "updated": "2026-10-18T10:04:21.433Z",
   "fleet_mode": "demo",
   "live_pct": 100,
   "placeholders": 3,
@@ -9,37 +9,37 @@
       "url": "https://buildcostgh.com",
       "ok": true,
       "status": 200,
-      "ms": 1147
+      "ms": 2936
     },
     {
       "url": "https://www.sporafind.com",
       "ok": true,
       "status": 200,
-      "ms": 338
+      "ms": 165
     },
     {
       "url": "https://studio.gabochie.com",
       "ok": true,
       "status": 200,
-      "ms": 358
+      "ms": 624
     },
     {
       "url": "https://ghbc.gabochie.com",
       "ok": true,
       "status": 200,
-      "ms": 201
+      "ms": 777
     },
     {
       "url": "https://devops.gabochie.com",
       "ok": true,
       "status": 200,
-      "ms": 181
+      "ms": 298
     },
     {
       "url": "https://mywa.gabochie.com",
       "ok": true,
       "status": 200,
-      "ms": 255
+      "ms": 174
     }
   ]
 }
