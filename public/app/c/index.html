@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Your project — Gabochie DevOps</title>
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1220">
+<meta name="color-scheme" content="dark light">
+<script src="/theme.js"></script>
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/app/app.css">
 </head>
 <body>
-<header class="top"><div class="wrap"><a class="brand" href="/">Gabochie <b>DevOps</b></a></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="/">Gabochie <b>DevOps</b></a><div class="tools"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme" aria-pressed="false">☀</button></div></div></header>
 <main class="wrap"><section>
 <p class="kicker">Private client page — this link is your login, don't share it</p>
 <h1 id="c-title">Loading…</h1>
@@ -16,47 +19,10 @@
 <h2>Findings</h2>
 <table><thead><tr><th>ID</th><th>Finding</th><th>Severity</th><th>Status</th></tr></thead><tbody id="c-findings"></tbody></table>
 <h2>Invoices</h2>
-<table><thead><tr><th>Ref</th><th>Item</th><th>Amount (GHS)</th><th>Status</th><th></th></tr></thead><tbody id="c-invoices"></tbody></table>
+<table><thead><tr><th>Ref</th><th>Item</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody id="c-invoices"></tbody></table>
 <p id="c-err" class="err"></p>
 </section></main>
-<script>
-(async () => {
-  const q = new URLSearchParams(location.search);
-  const err = (m, recovery) => {
-    document.getElementById("c-title").textContent = "Link invalid";
-    document.getElementById("c-err").innerHTML = m + (recovery
-      ? `<br><br><a class="btn" href="mailto:devops@gabochie.com?subject=${encodeURIComponent("Fresh client link request")}">Request a fresh link</a>
-         <span class="mut">Links expire after 30 days and work on one project only. A fresh one takes minutes on my side.</span>`
-      : "");
-  };
-  try {
-    const r = await fetch(`/api/client?id=${encodeURIComponent(q.get("id") || "")}&exp=${encodeURIComponent(q.get("exp") || "")}&token=${encodeURIComponent(q.get("token") || "")}`, { cache: "no-store" });
-    if (!r.ok) return err(r.status === 401 ? "This link expired or was made for a different project." : "Couldn't load your page right now.", true);
-    const { record } = await r.json();
-    document.getElementById("c-title").textContent = record.label;
-    document.getElementById("c-meta").textContent = `${record.stack} · ${record.stage}`;
-    const pct = Math.round((record.gate.done / record.gate.total) * 100);
-    document.getElementById("c-gate").style.width = pct + "%";
-    document.getElementById("c-gate").parentElement.title = `${record.gate.done}/${record.gate.total}`;
-    document.getElementById("c-findings").innerHTML = record.findings.map((f) =>
-      `<tr><td>${f.id}</td><td>${f.title}</td><td>${f.severity}</td><td><span class="pill ${f.status === "fixed" ? "done" : "open"}">${f.status}</span></td></tr>`).join("");
-    document.getElementById("c-invoices").innerHTML = record.invoices.map((v) =>
-      `<tr><td>${v.ref}</td><td>${v.item}</td><td>${Number(v.amountGHS).toFixed(2)}</td>` +
-      `<td><span class="pill ${v.status === "paid" ? "done" : "open"}">${v.status}</span></td>` +
-      `<td>${v.status === "pending" ? `<button data-pay="${v.ref}">Pay</button>` : ""}</td></tr>`).join("");
-    document.querySelectorAll("[data-pay]").forEach((btn) => btn.addEventListener("click", async () => {
-      btn.disabled = true;
-      try {
-        const pr = await fetch("/api/deposit", { method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ clientId: record.id, token: q.get("token"), exp: q.get("exp"), invoiceRef: btn.dataset.pay }) });
-        const d = await pr.json();
-        if (pr.ok && d.checkoutUrl) location.href = d.checkoutUrl;
-        else document.getElementById("c-err").textContent = "Payments aren't live yet — you'll be notified.";
-      } catch { document.getElementById("c-err").textContent = "Network hiccup — try again."; }
-      btn.disabled = false;
-    }));
-  } catch { err("Network hiccup — check your connection and reload.", false); }
-})();
-</script>
+<script src="/site.js" defer></script>
+<script src="/app/c/c.js" defer></script>
 </body>
 </html>

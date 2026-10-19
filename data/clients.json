@@ -12,8 +12,8 @@
         { "id": "F-003", "title": "No rate limit on login", "severity": "High", "status": "open" }
       ],
       "invoices": [
-        { "ref": "INV-DEMO-001", "item": "Readiness audit", "amountGHS": 1500.0, "status": "paid" },
-        { "ref": "INV-DEMO-002", "item": "Hardening sprint (deposit)", "amountGHS": 2000.0, "status": "pending" }
+        { "ref": "INV-DEMO-001", "item": "Readiness audit", "amount": 1500.0, "currency": "GHS", "status": "paid" },
+        { "ref": "INV-DEMO-002", "item": "Hardening sprint (deposit)", "amount": 1000.0, "currency": "USD", "status": "pending", "payUrl": "" }
       ]
     }
   ]

@@ -39,8 +39,8 @@ const tabs=[["execute","▶ Execute Now",1],["top8","⭐ Top 8 + Cases",8],["rea
 let active="execute";
 function renderNav(){
 const navEl=document.getElementById("nav"),mnavEl=document.getElementById("mnav");
-if(navEl)navEl.innerHTML=tabs.map(t=>`<button class="${active===t[0]?'active':''}" onclick="go('${t[0]}')">${t[1]}<span class="c">${t[2]}</span></button>`).join('');
-if(mnavEl)mnavEl.innerHTML=tabs.map(t=>`<button class="${active===t[0]?'active':''}" onclick="go('${t[0]}')">${t[1]}</button>`).join('');
+if(navEl)navEl.innerHTML=tabs.map(t=>`<button class="${active===t[0]?'active':''}" data-go="${t[0]}">${t[1]}<span class="c">${t[2]}</span></button>`).join('');
+if(mnavEl)mnavEl.innerHTML=tabs.map(t=>`<button class="${active===t[0]?'active':''}" data-go="${t[0]}">${t[1]}</button>`).join('');
 }
 function badge(c){return c==='sell'?'<span class="badge g">SELL</span>':c==='fix'?'<span class="badge a">FIX</span>':c==='clean'?'<span class="badge r">CLEAN</span>':c==='cai'?'<span class="badge b">C:\\AI</span>':'<span class="badge b">INFO</span>'}
 function go(c){active=c;document.getElementById('detail').classList.remove('show');renderNav();render();document.querySelector('.content').scrollTop=0}
@@ -58,16 +58,16 @@ else if(active==='fix'){list=D.filter(x=>x.cat==='fix'||(x.cat==='all'))}
 else{list=D.filter(x=>x.cat===active)}
 if(q)list=list.filter(x=>(x.t+x.n+x.s+x.id).toLowerCase().includes(q));
 document.getElementById('static').innerHTML='';
-document.getElementById('cards').innerHTML=list.map(x=>`<div class="card" onclick="openD('${x.id}')"><div style="display:flex;justify-content:space-between;align-items:center">${badge(x.cat)}<span style="font-size:12px;color:var(--mut)">★ ${x.sc}/5</span></div><h3>${x.t}</h3><p><b style="color:var(--txt)">${x.id}</b> — ${x.n}</p><p>🛠 ${x.s}<br>🚀 ${x.d}<br>🌐 ${x.u}</p></div>`).join('')||'<p style="color:var(--mut)">No matches. Try another search.</p>';
+document.getElementById('cards').innerHTML=list.map(x=>`<div class="card" data-open="${x.id}" role="button" tabindex="0"><div style="display:flex;justify-content:space-between;align-items:center">${badge(x.cat)}<span style="font-size:12px;color:var(--mut)">★ ${x.sc}/5</span></div><h3>${x.t}</h3><p><b style="color:var(--txt)">${x.id}</b> — ${x.n}</p><p>🛠 ${x.s}<br>🚀 ${x.d}<br>🌐 ${x.u}</p></div>`).join('')||'<p style="color:var(--mut)">No matches. Try another search.</p>';
 }
 function openD(id){
 const x=D.find(y=>y.id===id);if(!x)return;
 const el=document.getElementById('detail');
-el.innerHTML=`<div style="display:flex;justify-content:space-between"><h2>${x.t}</h2><button class="btn ghost" onclick="document.getElementById('detail').classList.remove('show')">✕ Close</button></div>
+el.innerHTML=`<div style="display:flex;justify-content:space-between"><h2>${x.t}</h2><button class="btn ghost" data-close>✕ Close</button></div>
 <div class="row">${badge(x.cat)}<span class="badge b">★ ${x.sc}/5</span><span class="badge b">${x.s}</span></div>
 <div class="kv"><div>What it is</div><div>${x.n}</div><div>Deploy</div><div>${x.d}</div><div>Live URL</div><div>${x.u}</div></div>
 <div class="fixbox"><b>🔧 Fix to sell:</b> ${x.fix}</div><div class="sellbox"><b>💰 Sell angle:</b> ${x.sell}</div>
-<div class="row" style="margin-top:12px"><button class="btn" onclick="verifyOne('${x.u}')">Open live link</button></div>`;
+<div class="row" style="margin-top:12px"><button class="btn" data-verify-one="${x.u}">Open live link</button></div>`;
 el.classList.add('show');el.scrollIntoView({behavior:'smooth'});
 }
 function store(k){try{return JSON.parse(localStorage.getItem(k)||"{}")}catch(e){try{localStorage.removeItem(k)}catch(_){}return{}}}
@@ -81,14 +81,14 @@ const keys=["live","feed","flow","public","push","proof"];
 const n=keys.filter(k=>auto[k]&&auto[k].ok===true).length, pct=Math.round(n/keys.length*100);
 const tick=(ok)=>ok===true?"✅":ok===false?"❌":"⏳";
 const row=(k,label)=>`<div class="sellbox">${tick(auto[k]&&auto[k].ok)} <b>${label}</b>${auto[k]&&auto[k].detail?" — <small>"+auto[k].detail+"</small>":""}</div>`;
-document.getElementById('static').innerHTML=`<div class="detail show"><h2>▶ Execute — ${n}/${keys.length} auto-verified (${pct}%)</h2><div style="background:#0c1330;border-radius:10px;height:14px;overflow:hidden"><div style="width:${pct}%;height:100%;background:linear-gradient(90deg,#6366f1,#22c55e)"></div></div>
-<h3>🤖 Event-driven — system verifies, you only do security <button class="btn ghost" onclick="runAutoVerify()">Run auto-verify</button> <small style="color:var(--mut)">${auto.ts?"last: "+auto.ts:"never run"}</small></h3>
+document.getElementById('static').innerHTML=`<div class="detail show"><h2>▶ Execute — ${n}/${keys.length} auto-verified (${pct}%)</h2><div style="background:var(--bg);border-radius:10px;height:14px;overflow:hidden"><div style="width:${pct}%;height:100%;background:linear-gradient(90deg,var(--acc),var(--grn))"></div></div>
+<h3>🤖 Event-driven — system verifies, you only do security <button class="btn ghost" data-run-auto>Run auto-verify</button> <small style="color:var(--mut)">${auto.ts?"last: "+auto.ts:"never run"}</small></h3>
 ${row("live","6 lives responding")}${row("feed","Audit feed fresh + green")}${row("flow","Nightly audit succeeding")}${row("public","8 showcase repos public")}${row("push","Showcase pushes on GitHub (Oct 16+)")}${row("proof","README proof blocks live")}
-<h3>🔒 Security gate — human only <label style="display:flex;gap:10px;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0;cursor:pointer"><input type="checkbox" ${sec.del?"checked":""} onchange="toggleSec()" style="width:18px;height:18px"><span style="${sec.del?"text-decoration:line-through;opacity:.6":""}">I reviewed + deleted the 11 no-git clutter folders (deletes are irreversible)</span></label></h3>
+<h3>🔒 Security gate — human only <label style="display:flex;gap:10px;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0;cursor:pointer"><input type="checkbox" ${sec.del?"checked":""} data-toggle-sec style="width:18px;height:18px"><span style="${sec.del?"text-decoration:line-through;opacity:.6":""}">I reviewed + deleted the 11 no-git clutter folders (deletes are irreversible)</span></label></h3>
 <h3>🔍 Public frontend audit vs facts.txt — 6.5/10 → all 4 gaps FIXED Oct 16 (8366308, live)</h3><div class="sellbox"><b>PASS:</b> hybrid positioning (no junior signals) · 4 PR-linked cases + live stats · free magnets · MoMo · monitoring in gate.</div><div class="fixbox"><b>4 load-bearing gaps:</b> 1) architect identity ABSENT · 2) agentic story ABSENT · 3) no price anchors ($1,500–2,500 never stated) · 4) no human face. Fix: founder strip → market Gate 3 as triage-agent demo → guardrails insight post → starting-at prices.</div>
 <h3>🔒 Consoles gated Oct 16 (live)</h3><div class="fixbox"><b>Done:</b> /os/ + /app/ behind CONSOLE_TOKEN cookie gate (fail-open until set), /unlock/ page, shared nav, noindex on /os/. <b>Your 2-min step:</b> Pages → devops-gabochie → Settings → Variables → secret CONSOLE_TOKEN → Redeploy → open /unlock/ once.</div>
 <h3>🧍 Human lane — no ticks needed, excluded from %</h3>${HUMAN.map(h=>`<div class="fixbox">${h}</div>`).join("")}
-<p><button class="btn ghost" onclick="localStorage.removeItem('gab_exec');showExecute()">Reset</button> Progress saves in this browser.</p><h3>🤖 Autonomy — supervised, not self-driving</h3><div class="sellbox"><b>Gate 2 ✅ LIVE Oct 16:</b> Demo→Dry→Live contract live — <code>data/mode.json</code> + <code>scripts/mode.mjs</code> + <code>audit.mjs</code> reports <code>fleet_mode</code>. Current mode: <b>${(auto.mode||"demo").toUpperCase()}</b> (from metrics.json). Mutating scripts call <code>assertLive()</code> and refuse anything beyond demo. Flipping to live is a human act: edit mode.json + commit.</div><div class="fixbox"><b>Never automate:</b> push, deploys, deletes, DMs, posts, billing, lead data — human approve every time.<br><b>Safe to automate:</b> status scans, live checks, README proof-checks, audit writes to own data/.<br><b>Professional =</b> every claim has file:line evidence + green gate re-run + rollback plan. Automate proof capture, not promises.</div>
+<p><button class="btn ghost" data-reset-exec>Reset</button> Progress saves in this browser.</p><h3>🤖 Autonomy — supervised, not self-driving</h3><div class="sellbox"><b>Gate 2 ✅ LIVE Oct 16:</b> Demo→Dry→Live contract live — <code>data/mode.json</code> + <code>scripts/mode.mjs</code> + <code>audit.mjs</code> reports <code>fleet_mode</code>. Current mode: <b>${(auto.mode||"demo").toUpperCase()}</b> (from metrics.json). Mutating scripts call <code>assertLive()</code> and refuse anything beyond demo. Flipping to live is a human act: edit mode.json + commit.</div><div class="fixbox"><b>Never automate:</b> push, deploys, deletes, DMs, posts, billing, lead data — human approve every time.<br><b>Safe to automate:</b> status scans, live checks, README proof-checks, audit writes to own data/.<br><b>Professional =</b> every claim has file:line evidence + green gate re-run + rollback plan. Automate proof capture, not promises.</div>
 <div class="sellbox"><b>Demo scan ✅ Oct 16 12:10 (read-only, file: demo-scan.ps1):</b> Dirty 2 by design (DBGabochie 3 private, freellmapi 2 third-party). D1 placeholders 0 in fixed files; new finds: lutterodt preview DB/KV (2), calcgh Flutterwave test fallback (1). Lives 6/6 listed for check. Next: Dry-mode (diffs only, no apply).</div>
 <div class="sellbox"><b>Gate 1 ✅ APPLIED + PUSHED Oct 16:</b> Guards committed + pushed (mywa ec3e185, aec 601aa85 → new PRIVATE gabochie/aec-command-center). Compose fail-loud on JWT/ENCRYPTION_KEY. <b>Push wave ✅:</b> all 14 in sync — web, buildcostgh, ghbc, gtpm, Gh2047, green, beth (remote fixed), GDFII, airevops, plf, ai-builder. New repos private; flip showcase ones public when ready.</div>
 <div class="sellbox"><b>Gate 3 ✅ LIVE Oct 16 (95a0f50, pushed):</b> True loop running — scripts/audit.mjs checks 6 lives + placeholders + .env guard, appends data/audit-log.jsonl, updates data/metrics.json. First run: 100% live, 0 placeholders, guard pass. Schedule: Sun 06:00 UTC + manual dispatch; commits only data/*.json. Weekly numbers: live %, placeholders, guard. Feed public ✅ metrics.json readable (100/0/pass). First Actions run ✅ success 16s Oct 16 (workflow_dispatch). Both checkouts synced.</div>
@@ -186,14 +186,14 @@ document.getElementById('static').innerHTML=`<div class="detail show">
 <h2>⭐ Recommendation — Top 8 Across GitHub + C:\\AI (Oct 16 2026)</h2>
 <p style="color:var(--mut)">Scored for: fast freelance cash + architect moat + live proof. 20-25h/week, family-first.</p>
 <ol>
-<li><b>buildcostgh 9.2 [GitHub]</b> — Estimator + PDF. <b>Fix:</b> Vercel Prisma migrate. <b>Sell to:</b> contractors. <button class="btn ghost" onclick="openD('buildcostgh')">Open card</button></li>
-<li><b>cai-mywa 9.0 [C:\\AI]</b> — WhatsApp → leads. <b>Fix:</b> pytest + commit + D1 verify. <b>Sell to:</b> realtors. <button class="btn ghost" onclick="openD('cai-mywa')">Open card</button></li>
-<li><b>ghbc 8.8 [GitHub]</b> — Code AI, 27k clauses. <b>Fix:</b> corpus ingest prod. <b>Sell to:</b> architects/assemblies. <button class="btn ghost" onclick="openD('ghbc')">Open card</button></li>
-<li><b>sporafind 8.7 [GitHub]</b> — Diaspora + Stripe $29-99. <b>Fix:</b> CORS/env sync. <b>Sell to:</b> recruiters. <button class="btn ghost" onclick="openD('sporafind')">Open card</button></li>
-<li><b>studio.gabochie 8.5</b> — LMS + certs. <b>Fix:</b> predeploy check. <b>Sell to:</b> schools/churches. <button class="btn ghost" onclick="openD('studio.gabochie')">Open card</button></li>
-<li><b>cai-sales 8.3 [C:\\AI]</b> — AI caller Demo/Dry/Live. <b>Fix:</b> webhook + secrets. <b>Sell as:</b> Agentic DevOps proof. <button class="btn ghost" onclick="openD('cai-sales')">Open card</button></li>
-<li><b>devops-gabochie 8.0</b> — Hardening console live. <b>Fix:</b> GITHUB_TOKEN. <b>Sell as:</b> process proof. <button class="btn ghost" onclick="openD('devops-gabochie')">Open card</button></li>
-<li><b>muse 7.8</b> — Music + USDC. Park until 1-5 done. <button class="btn ghost" onclick="openD('muse')">Open card</button></li>
+<li><b>buildcostgh 9.2 [GitHub]</b> — Estimator + PDF. <b>Fix:</b> Vercel Prisma migrate. <b>Sell to:</b> contractors. <button class="btn ghost" data-open="buildcostgh">Open card</button></li>
+<li><b>cai-mywa 9.0 [C:\\AI]</b> — WhatsApp → leads. <b>Fix:</b> pytest + commit + D1 verify. <b>Sell to:</b> realtors. <button class="btn ghost" data-open="cai-mywa">Open card</button></li>
+<li><b>ghbc 8.8 [GitHub]</b> — Code AI, 27k clauses. <b>Fix:</b> corpus ingest prod. <b>Sell to:</b> architects/assemblies. <button class="btn ghost" data-open="ghbc">Open card</button></li>
+<li><b>sporafind 8.7 [GitHub]</b> — Diaspora + Stripe $29-99. <b>Fix:</b> CORS/env sync. <b>Sell to:</b> recruiters. <button class="btn ghost" data-open="sporafind">Open card</button></li>
+<li><b>studio.gabochie 8.5</b> — LMS + certs. <b>Fix:</b> predeploy check. <b>Sell to:</b> schools/churches. <button class="btn ghost" data-open="studio.gabochie">Open card</button></li>
+<li><b>cai-sales 8.3 [C:\\AI]</b> — AI caller Demo/Dry/Live. <b>Fix:</b> webhook + secrets. <b>Sell as:</b> Agentic DevOps proof. <button class="btn ghost" data-open="cai-sales">Open card</button></li>
+<li><b>devops-gabochie 8.0</b> — Hardening console live. <b>Fix:</b> GITHUB_TOKEN. <b>Sell as:</b> process proof. <button class="btn ghost" data-open="devops-gabochie">Open card</button></li>
+<li><b>muse 7.8</b> — Music + USDC. Park until 1-5 done. <button class="btn ghost" data-open="muse">Open card</button></li>
 </ol>
 <h2>📄 First 3 Case Studies — Architect Money Trilogy</h2>
 <div class="sellbox"><b>Case 1: BuildCostGH — Quote in minutes, not days</b><br>Problem: guesswork quotes lose jobs. Build: Next16 + Prisma + PDF/XLSX + crons on Vercel. Proof: [add screenshot of estimate + PDF]. Result: contractor sends pro quote same day. CTA: I build cost tools for Ghana builders — $1,500 MVP in 14 days.</div>
@@ -211,4 +211,18 @@ document.getElementById('static').innerHTML=`<div class="detail show">
 function verifyOne(u){if(!u||u.includes('—')){alert('No live URL set for this project yet.');return}let url=u.split(' ')[0];if(!url.startsWith('http'))url='https://'+url;window.open(url,'_blank')}
 function verifyLinks(){alert('Opening top 5 sell-now links for manual check. Mark OK / broken.');["https://buildcostgh.com","https://www.sporafind.com","https://studio.gabochie.com","https://ghbc.gabochie.com","https://devops.gabochie.com"].forEach(u=>window.open(u,'_blank'))}
 document.getElementById('q').addEventListener('input',render);
+document.addEventListener('click',(e)=>{
+const g=e.target.closest('[data-go]');if(g){go(g.dataset.go);return}
+const o=e.target.closest('[data-open]');if(o){openD(o.dataset.open);return}
+const c=e.target.closest('[data-close]');if(c){document.getElementById('detail').classList.remove('show');return}
+const v=e.target.closest('[data-verify-one]');if(v){verifyOne(v.dataset.verifyOne);return}
+const a=e.target.closest('[data-run-auto]');if(a){runAutoVerify();return}
+const r=e.target.closest('[data-reset-exec]');if(r){localStorage.removeItem('gab_exec');showExecute();return}
+const l=e.target.closest('[data-verify-links]');if(l){verifyLinks();return}
+});
+document.addEventListener('change',(e)=>{if(e.target.closest('[data-toggle-sec]'))toggleSec()});
+document.addEventListener('keydown',(e)=>{
+if(e.key!=='Enter'&&e.key!==' ')return;
+const t=e.target.closest('[data-open][role="button"]');if(t){e.preventDefault();openD(t.dataset.open)}
+});
 try{renderNav();render();document.getElementById("jsstat").textContent="JS: live ✅ "+new Date().toISOString().slice(11,16)}catch(e){document.getElementById("static").innerHTML=`<div class="detail show"><h2>⚠ Dashboard failed to start</h2><p>${String(e).slice(0,300)}</p><p>Hard-refresh (Ctrl+Shift+R). If it persists, open Console (F12) and send the red error text.</p></div>`}

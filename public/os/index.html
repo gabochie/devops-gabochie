@@ -5,17 +5,17 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Gabochie Portfolio OS</title>
 <style>
-:root{--bg:#0a0f1e;--panel:#111a30;--panel2:#162040;--line:#24315a;--txt:#e6ecff;--mut:#8b98bd;--acc:#6366f1;--grn:#22c55e;--amb:#f59e0b;--red:#ef4444;--blu:#3b82f6}
+:root{--bg:#0B1220;--panel:#121C2E;--panel2:#16233A;--line:#22304A;--txt:#E7ECF4;--mut:#93A1B5;--acc:#C9A84C;--acc2:#E3C878;--on-acc:#0B1220;--grn:#34D399;--amb:#F59E0B;--red:#F87171;--blu:#8AB4E8}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,system-ui;background:var(--bg);color:var(--txt);height:100vh;display:flex;overflow:hidden}
 aside{width:250px;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px;flex-shrink:0}
-aside .logo{font-weight:800;font-size:18px;background:linear-gradient(90deg,#818cf8,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+aside .logo{font-weight:800;font-size:18px;background:linear-gradient(90deg,var(--acc2),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 aside small{color:var(--mut)}.nav{margin-top:18px;display:flex;flex-direction:column;gap:6px}
 .nav button{background:transparent;border:1px solid transparent;color:var(--txt);text-align:left;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:14px;display:flex;justify-content:space-between;align-items:center}
 .nav button.active,.nav button:hover{background:var(--panel2);border-color:var(--line)}
-.nav button .c{background:#26315c;border-radius:12px;padding:1px 8px;font-size:12px}
+.nav button .c{background:#1B2942;border-radius:12px;padding:1px 8px;font-size:12px}
 main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .topbar{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;background:rgba(17,26,48,.8);backdrop-filter:blur(8px)}
-.topbar input{flex:1;background:#0c1330;border:1px solid var(--line);color:var(--txt);padding:10px 14px;border-radius:10px;outline:none}
+.topbar input{flex:1;background:var(--bg);border:1px solid var(--line);color:var(--txt);padding:10px 14px;border-radius:10px;outline:none}
 .stats{display:flex;gap:10px;padding:14px 22px;flex-wrap:wrap}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:130px}
 .stat b{font-size:22px;display:block}.stat span{font-size:12px;color:var(--mut)}
@@ -23,6 +23,8 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:14px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:.15s}
 .card:hover{transform:translateY(-2px);border-color:var(--acc)}
+.card:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.nav button:focus-visible,.mnav button:focus-visible,.btn:focus-visible,.topbar input:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:8px}
 .card h3{margin:0 0 4px;font-size:16px}.card p{font-size:13px;color:var(--mut);margin:6px 0;line-height:1.5}
 .badge{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;display:inline-block}
 .g{background:rgba(34,197,94,.15);color:#4ade80}.a{background:rgba(245,158,11,.15);color:#fbbf24}.r{background:rgba(239,68,68,.15);color:#fca5a5}.b{background:rgba(59,130,246,.15);color:#93c5fd}
@@ -31,7 +33,7 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .detail.show{display:block}.detail h2{margin-top:0}
 .kv{display:grid;grid-template-columns:140px 1fr;gap:8px;font-size:14px;margin:12px 0}
 .kv div:nth-child(odd){color:var(--mut)}
-.btn{background:var(--acc);color:white;border:0;padding:9px 14px;border-radius:9px;cursor:pointer;font-weight:700}
+.btn{background:var(--acc);color:var(--on-acc);border:0;padding:9px 14px;border-radius:9px;cursor:pointer;font-weight:700}
 .btn.ghost{background:transparent;border:1px solid var(--line)}
 .fixbox{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:13px}
 .sellbox{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:13px}
@@ -39,18 +41,18 @@ ol li,ul li{margin-bottom:8px;font-size:14px;line-height:1.6}
 @media(max-width:800px){aside{display:none}body{flex-direction:column}main{height:100vh}.mnav{display:flex!important}}
 .mnav{display:none;gap:6px;padding:10px;overflow:auto;background:var(--panel)}
 .mnav button{white-space:nowrap;background:var(--panel2);border:1px solid var(--line);color:var(--txt);padding:8px 12px;border-radius:20px}
-.mnav button.active{background:var(--acc)}
+.mnav button.active{background:var(--acc);color:var(--on-acc)}
 </style>
 </head>
 <body>
 <aside>
 <div class="logo">◆ Gabochie OS</div><small>50 projects • Oct 16 2026<br>Comfortable: Linux/Git/Docker</small>
-<div class="nav" id="nav"><button class="active" onclick="go('execute')">▶ Execute Now<span class="c">auto</span></button><button onclick="go('top8')">⭐ Top 8 + Cases<span class="c">8</span></button><button onclick="go('ready')">🟢 Ready Check<span class="c">95%</span></button><button onclick="go('repos')">📁 Repos Clean/Dirty<span class="c">45</span></button><button onclick="go('sell')">💰 Sell Now<span class="c">5</span></button><button onclick="go('fix')">🔧 Needs Fix<span class="c">14</span></button><button onclick="go('cai')">🤖 C:\AI Mine<span class="c">11</span></button><button onclick="go('live')">🌐 Live Check<span class="c">13</span></button><button onclick="go('clean')">🧹 Cleanup<span class="c">18</span></button><button onclick="go('plan')">✅ 7-Step Plan<span class="c">7</span></button><button onclick="go('all')">📦 All<span class="c">67</span></button></div>
+<div class="nav" id="nav"><button class="active" data-go="execute">▶ Execute Now<span class="c">auto</span></button><button data-go="top8">⭐ Top 8 + Cases<span class="c">8</span></button><button data-go="ready">🟢 Ready Check<span class="c">95%</span></button><button data-go="repos">📁 Repos Clean/Dirty<span class="c">45</span></button><button data-go="sell">💰 Sell Now<span class="c">5</span></button><button data-go="fix">🔧 Needs Fix<span class="c">14</span></button><button data-go="cai">🤖 C:\AI Mine<span class="c">11</span></button><button data-go="live">🌐 Live Check<span class="c">13</span></button><button data-go="clean">🧹 Cleanup<span class="c">18</span></button><button data-go="plan">✅ 7-Step Plan<span class="c">7</span></button><button data-go="all">📦 All<span class="c">67</span></button></div>
 <div style="margin-top:auto;font-size:12px;color:var(--mut)">Tip: click any card for nocoder detail + fix.<br><a href="/" style="color:var(--mut)">Public site</a> · <a href="/app/" style="color:var(--mut)">Console</a><br><span id="jsstat">JS: starting…</span></div>
 </aside>
 <main>
-<div class="mnav" id="mnav"><button class="active" onclick="go('execute')">▶ Execute</button><button onclick="go('top8')">⭐ Top 8</button><button onclick="go('ready')">🟢 Ready</button><button onclick="go('repos')">📁 Repos</button><button onclick="go('sell')">💰 Sell</button><button onclick="go('fix')">🔧 Fix</button><button onclick="go('all')">📦 All</button></div>
-<div class="topbar"><input id="q" placeholder="Search projects, niches, tech… e.g. real estate, Stripe, Supabase"><button class="btn ghost" onclick="verifyLinks()">Verify live links</button></div>
+<div class="mnav" id="mnav"><button class="active" data-go="execute">▶ Execute</button><button data-go="top8">⭐ Top 8</button><button data-go="ready">🟢 Ready</button><button data-go="repos">📁 Repos</button><button data-go="sell">💰 Sell</button><button data-go="fix">🔧 Fix</button><button data-go="all">📦 All</button></div>
+<div class="topbar"><input id="q" placeholder="Search projects, niches, tech… e.g. real estate, Stripe, Supabase"><button class="btn ghost" data-verify-links>Verify live links</button></div>
 <div class="stats">
 <div class="stat"><b style="color:#4ade80">5</b><span>Sell now</span></div>
 <div class="stat"><b style="color:#fbbf24">14</b><span>Needs 1-2 day fix</span></div>

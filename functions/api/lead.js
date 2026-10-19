@@ -2,7 +2,7 @@
 // Validation-first: email/stack/pain allowlists, length caps, consent required, honeypot.
 // NOTE: no server-side rate limit yet (no KV/D1 on this project) — add KV per-IP guard
 // or Turnstile before any paid-traffic campaign. Secrets: BREVO_API_KEY via Pages secret.
-const STACKS = new Set(["Next.js", "Node API", "Python", "PHP / Laravel", "WordPress", "Cloudflare edge", "Static site", "Other"]);
+const STACKS = new Set(["Next.js", "Node API", "Python", "PHP / Laravel", "WordPress", "Cloudflare edge", "Supabase", "Neon Postgres", "Static site", "Other"]);
 const PAINS = new Set(["Checkout / payments", "Auth / access control", "Deploy / downtime", "Messy / slow codebase"]);
 const OWNER = "devops@gabochie.com";
 const SENDER = { name: "Gabochie DevOps", email: "devops@gabochie.com" }; // must be a verified Brevo sender

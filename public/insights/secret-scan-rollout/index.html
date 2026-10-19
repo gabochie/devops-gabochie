@@ -1,17 +1,36 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Four repos, fifteen historical secrets, zero live ones — Gabochie DevOps</title>
 <meta name="description" content="Rolling out secret scanning across a fleet: wrapper failures, token-free scanning, honest baselines.">
-<link rel="stylesheet" href="/styles.css">
+<meta name="color-scheme" content="dark light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Gabochie DevOps">
+<script src="/theme.js"></script>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png"><link rel="stylesheet" href="/styles.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
-<header class="top"><div class="wrap"><a class="brand" href="/">Gabochie <b>DevOps</b></a>
-<nav class="main"><a href="/#work">Work</a><a href="/#assess">Free check</a><a href="/insights/">Insights</a></nav>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="/">Gideon B. Abochie<span class="sep">—</span><b>Gabochie DevOps</b></a>
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">?</button>
+<nav id="primary-nav" class="main" aria-label="Primary">
+<a href="/#business">For businesses</a>
+<a href="/#team">Add to your team</a>
+<a href="/#work">Work</a>
+<a href="/insights/">Insights</a>
+<a href="/scan/">Risk Scan</a>
+<a class="nav-cta" href="/#assess">Get a free read</a>
+</nav>
+<div class="tools">
+<button class="install-btn" type="button" data-install hidden>Install app</button>
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme" aria-pressed="false">?</button>
+</div>
 </div></header>
-<main class="wrap"><section>
-<p class="kicker">2026-10-15 · Secret scanning · studio <a href="https://github.com/gabochie/studio-gabochie/pull/152">PR #152</a> · aiw <a href="https://github.com/gabochie/aiw/pull/2">PR #2</a></p>
+<main id="main" class="wrap"><section>
+<p class="kicker">2026-10-15 — Secret scanning — studio <a href="https://github.com/gabochie/studio-gabochie/pull/152">PR #152</a> — aiw <a href="https://github.com/gabochie/aiw/pull/2">PR #2</a></p>
 <h1>Four repos, fifteen historical secrets, zero live ones</h1>
 <div class="grid"><div class="card">
 <p>Rolling Gitleaks across four repos surfaced 15 real historical findings — Flutterwave keys, Stripe keys, a GCP key. The discipline that mattered wasn't the scan; it was what came after:</p>
@@ -21,6 +40,7 @@
 <p>The fleet procedure is written up as a reusable runbook — same one I'd run on your repo. <a href="/#assess">Start with the free check</a>.</p>
 </div></div>
 </section></main>
-<footer class="site"><div class="wrap"><div class="fine"><span>© 2026 Gabochie DevOps</span><span><a href="/">Home</a> · <a href="/insights/">Insights</a></span></div></div></footer>
+<footer class="site"><div class="wrap"><div class="fine"><span>— 2026 Gabochie DevOps</span><span><a href="/">Home</a> — <a href="/insights/">Insights</a> — <a href="/legal/privacy.html">Privacy</a></span></div></div></footer>
+<script src="/site.js" defer></script>
 </body>
 </html>

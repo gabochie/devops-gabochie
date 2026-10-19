@@ -1,12 +1,23 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Offline — Gabochie DevOps</title>
+<meta name="theme-color" content="#0B1220">
+<script src="/theme.js"></script>
 <link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
-<body><main class="wrap center">
-<h1>You are offline</h1>
-<p>Service pages need internet. Previously viewed content may still be cached.</p>
-<p><a href="/">Back home</a></p>
-</main></body>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="/">Gabochie <b>DevOps</b></a></div></header>
+<main id="main" class="wrap"><section class="hero" style="min-height:60vh;align-items:center">
+<div>
+<p class="kicker">You're offline</p>
+<h1>Connection lost</h1>
+<p class="lead">This page isn't cached yet. Reconnect to continue reading.</p>
+<div class="cta-row"><a class="btn" href="/">Go home</a><button class="btn ghost" type="button" data-retry>Retry</button></div>
+</div>
+</section></main>
+<script src="/site.js" defer></script>
+</body>
 </html>

@@ -40,9 +40,13 @@ for (const u of LIVES) results.push(await live(u));
 const livePct = Math.round((results.filter((r) => r.ok).length / results.length) * 100);
 
 // placeholders inside THIS repo only (tracked files)
+// Skip this scanner's own source: it literally contains the placeholder
+// strings below, so scanning itself would always report false positives.
+const SELF = "scripts/audit.mjs";
 const tracked = sh("git ls-files").split("\n").filter(Boolean);
 let placeholders = [];
 for (const f of tracked) {
+  if (f === SELF) continue;
   if (!/wrangler|env\.example|\.md$|\.m?js$|index\.html$/.test(f)) continue;
   let body = "";
   try { body = readFileSync(join(ROOT, f), "utf8"); } catch { continue; }

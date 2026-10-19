@@ -51,14 +51,23 @@ function detect(dir) {
   const pkgHas = (dep) => {
     try {
       const pkg = JSON.parse(fs.readFileSync(path.join(dir, "package.json"), "utf8"));
-      return dep in { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
+      const all = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}), ...(pkg.peerDependencies || {}) };
+      return dep in all;
     } catch { return false; }
   };
-  if ((ex("wrangler.json") || ex("wrangler.toml")) && ex("functions")) return "cloudflare-edge";
+  const hasSupabase = ex("supabase") || pkgHas("@supabase/supabase-js") || pkgHas("@supabase/auth-helpers-nextjs") || pkgHas("@supabase/ssr");
+  const hasNeon = pkgHas("@neondatabase/serverless") || pkgHas("neon") || pkgHas("@neondatabase/api-client");
+  if ((ex("wrangler.json") || ex("wrangler.jsonc") || ex("wrangler.toml")) && ex("functions")) return "cloudflare-edge";
   if (ex("wp-config.php") || ex("wp-content")) return "wordpress";
   if (ex("composer.json") || ex("artisan")) return "php-laravel";
   if (ex("requirements.txt") || ex("pyproject.toml") || ex("manage.py")) return "python";
-  if (ex("package.json")) return pkgHas("next") ? "nextjs" : "node-api";
+  if (ex("package.json")) {
+    let t = pkgHas("next") ? "nextjs" : "node-api";
+    if (hasSupabase && hasNeon) t += "+supabase+neon";
+    else if (hasSupabase) t += "+supabase";
+    else if (hasNeon) t += "+neon";
+    return t;
+  }
   try {
     if (fs.readdirSync(dir, { withFileTypes: true }).some((e) => e.isFile() && /\.html?$/i.test(e.name))) return "static";
   } catch { /* ignore */ }

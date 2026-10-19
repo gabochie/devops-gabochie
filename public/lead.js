@@ -1,6 +1,6 @@
 // Lead quiz: 3 steps → POST /api/lead. No deps. Honeypot + consent enforced client-side AND server-side.
 (function () {
-  const STACKS = ["Next.js", "Node API", "Python", "PHP / Laravel", "WordPress", "Cloudflare edge", "Static site", "Other"];
+  const STACKS = ["Next.js", "Node API", "Python", "PHP / Laravel", "WordPress", "Cloudflare edge", "Supabase", "Neon Postgres", "Static site", "Other"];
   const PAINS = ["Checkout / payments", "Auth / access control", "Deploy / downtime", "Messy / slow codebase"];
   const state = { stack: "", pain: "" };
   const $ = (id) => document.getElementById(id);
