@@ -25,6 +25,13 @@
     const { record } = await r.json();
     document.getElementById("c-title").textContent = record.label;
     document.getElementById("c-meta").textContent = `${record.stack} · ${record.stage}`;
+    const paidRef = q.get("paid") || "";
+    if (paidRef) {
+      const hit = record.invoices.find((v) => paidRef.indexOf(v.ref) !== -1);
+      document.getElementById("c-note").textContent = hit
+        ? `Payment reference received for ${hit.ref}. I confirm settlement on my side and mark it paid within a few hours — nothing more for you to do.`
+        : "Payment reference received. I'll confirm and update your invoice shortly.";
+    }
     const pct = Math.round((record.gate.done / record.gate.total) * 100);
     document.getElementById("c-gate").style.width = pct + "%";
     document.getElementById("c-gate").parentElement.title = `${record.gate.done}/${record.gate.total}`;
