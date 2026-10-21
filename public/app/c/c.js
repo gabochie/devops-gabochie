@@ -1,9 +1,9 @@
-(async () => {
+﻿(async () => {
   const q = new URLSearchParams(location.search);
   const err = (m, recovery) => {
     document.getElementById("c-title").textContent = "Link invalid";
     document.getElementById("c-err").innerHTML = m + (recovery
-      ? `<br><br><a class="btn" href="mailto:devops@gabochie.com?subject=${encodeURIComponent("Fresh client link request")}">Request a fresh link</a>
+      ? `<br><br><a class="btn" href="mailto:admin@gabochie.com?subject=${encodeURIComponent("Fresh client link request")}">Request a fresh link</a>
          <span class="mut">Links expire after 30 days and work on one project only. A fresh one takes minutes on my side.</span>`
       : "");
   };
@@ -17,19 +17,19 @@
     if (v.status !== "pending") return "";
     if (v.payUrl) return `<a class="btn ghost" href="${v.payUrl}" target="_blank" rel="noopener noreferrer">Pay</a>`;
     if ((v.currency || "GHS") === "GHS") return `<button data-pay="${v.ref}">Pay</button>`;
-    return `<a class="btn ghost" href="mailto:devops@gabochie.com?subject=${encodeURIComponent("Payment for " + v.ref)}">Pay by Wise / Payoneer</a>`;
+    return `<a class="btn ghost" href="mailto:admin@gabochie.com?subject=${encodeURIComponent("Payment for " + v.ref)}">Pay by Wise / Payoneer</a>`;
   };
   try {
     const r = await fetch(`/api/client?id=${encodeURIComponent(q.get("id") || "")}&exp=${encodeURIComponent(q.get("exp") || "")}&token=${encodeURIComponent(q.get("token") || "")}`, { cache: "no-store" });
     if (!r.ok) return err(r.status === 401 ? "This link expired or was made for a different project." : "Couldn't load your page right now.", true);
     const { record } = await r.json();
     document.getElementById("c-title").textContent = record.label;
-    document.getElementById("c-meta").textContent = `${record.stack} · ${record.stage}`;
+    document.getElementById("c-meta").textContent = `${record.stack} Â· ${record.stage}`;
     const paidRef = q.get("paid") || "";
     if (paidRef) {
       const hit = record.invoices.find((v) => paidRef.indexOf(v.ref) !== -1);
       document.getElementById("c-note").textContent = hit
-        ? `Payment reference received for ${hit.ref}. I confirm settlement on my side and mark it paid within a few hours — nothing more for you to do.`
+        ? `Payment reference received for ${hit.ref}. I confirm settlement on my side and mark it paid within a few hours â€” nothing more for you to do.`
         : "Payment reference received. I'll confirm and update your invoice shortly.";
     }
     const pct = Math.round((record.gate.done / record.gate.total) * 100);
@@ -48,9 +48,9 @@
           body: JSON.stringify({ clientId: record.id, token: q.get("token"), exp: q.get("exp"), invoiceRef: btn.dataset.pay }) });
         const d = await pr.json();
         if (pr.ok && d.checkoutUrl) location.href = d.checkoutUrl;
-        else document.getElementById("c-err").textContent = d.message || "Payments aren't live yet — you'll be notified.";
-      } catch { document.getElementById("c-err").textContent = "Network hiccup — try again."; }
+        else document.getElementById("c-err").textContent = d.message || "Payments aren't live yet â€” you'll be notified.";
+      } catch { document.getElementById("c-err").textContent = "Network hiccup â€” try again."; }
       btn.disabled = false;
     }));
-  } catch { err("Network hiccup — check your connection and reload.", false); }
+  } catch { err("Network hiccup â€” check your connection and reload.", false); }
 })();
