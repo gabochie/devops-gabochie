@@ -1,4 +1,4 @@
-:root{
+﻿:root{
   --bg:#0B1220; --bg2:#0E1626; --panel:#121C2E; --panel2:#16233A;
   --line:#22304A; --line2:#33465F;
   --ink:#E7ECF4; --mut:#93A1B5;
@@ -109,7 +109,7 @@ p.lead{color:var(--mut);font-size:1.16rem;max-width:46rem}
 .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.15rem .7rem;font-size:.8rem;color:var(--mut);margin:.15rem .25rem .15rem 0}
 
 /* proof strip */
-#proof-strip:empty::after{content:"Loading live proof…";color:var(--mut)}
+#proof-strip:empty::after{content:"Loading live proofâ€¦";color:var(--mut)}
 .bar{height:.55rem;background:#0A1120;border-radius:999px;overflow:hidden;margin-top:.6rem}
 .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--link),var(--gold))}
 .bar.big{height:1rem}
@@ -178,3 +178,42 @@ html[data-theme="light"] .pill.done{background:#DCF5EA;color:var(--ok)}
 html[data-theme="light"] .pill.open{background:#FDF0D5;color:var(--warn)}
 html[data-theme="light"] .card.featured{background:linear-gradient(180deg,#FFFFFF,var(--panel))}
 @media print{html[data-theme="light"] .card{border-color:#ccc}}
+
+/* Bottom bar (mobile PWA navigation) */
+.bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(11,18,32,.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  padding: .4rem .5rem calc(.4rem + env(safe-area-inset-bottom));
+  justify-content: space-around;
+  align-items: center;
+  gap: .25rem;
+}
+.bottom-bar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .15rem;
+  color: var(--mut);
+  text-decoration: none;
+  font-size: .68rem;
+  font-weight: 600;
+  padding: .35rem .5rem;
+  border-radius: .4rem;
+  transition: color .15s;
+  flex: 1;
+  text-align: center;
+}
+.bottom-bar a:hover { color: var(--ink); }
+.bottom-bar a svg { width: 20px; height: 20px; }
+@media (max-width: 720px) {
+  .bottom-bar { display: flex; }
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
+}
