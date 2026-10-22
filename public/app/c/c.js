@@ -3,8 +3,9 @@
   const err = (m, recovery) => {
     document.getElementById("c-title").textContent = "Link invalid";
     document.getElementById("c-err").innerHTML = m + (recovery
-      ? `<br><br><a class="btn" href="mailto:admin@gabochie.com?subject=${encodeURIComponent("Fresh client link request")}">Request a fresh link</a>
-         <span class="mut">Links expire after 30 days and work on one project only. A fresh one takes minutes on my side.</span>`
+      ? `<br><br><a class="btn" href="mailto:admin@gabochie.com?subject=${encodeURIComponent("Fresh client link request")}">Request a fresh link</a><br>
+         <span class="mut">Links expire after 30 days and work on one project only.</span><br>
+         <span class="mut">Need help? Email <b>admin@gabochie.com</b>, call <b>+233 24 326 2019</b>, or WhatsApp <b>+233 26 824 8970</b>.</span>`
       : "");
   };
   const money = (v) => {

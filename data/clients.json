@@ -15,6 +15,23 @@
         { "ref": "INV-DEMO-001", "item": "Readiness audit", "amount": 1500.0, "currency": "GHS", "status": "paid" },
         { "ref": "INV-DEMO-002", "item": "Hardening sprint (deposit)", "amount": 1000.0, "currency": "USD", "status": "pending", "payUrl": "" }
       ]
+    },
+    {
+      "id": "sample-ghana-startup",
+      "label": "Sample Client — Seed-stage Fintech",
+      "stack": "Node.js + Supabase",
+      "stage": "Production Readiness Audit",
+      "gate": { "done": 6, "total": 12 },
+      "findings": [
+        { "id": "F-101", "title": "Hardcoded API key in frontend bundle", "severity": "Critical", "status": "open" },
+        { "id": "F-102", "title": "No secret scanning in CI pipeline", "severity": "High", "status": "open" },
+        { "id": "F-103", "title": "Missing security headers (CSP, HSTS)", "severity": "Medium", "status": "open" },
+        { "id": "F-104", "title": "Database backups not automated", "severity": "Medium", "status": "fixed" }
+      ],
+      "invoices": [
+        { "ref": "INV-FINTECH-001", "item": "Production Readiness Audit", "amount": 2500.0, "currency": "USD", "status": "paid" },
+        { "ref": "INV-FINTECH-002", "item": "Remediation Sprint (deposit)", "amount": 12000.0, "currency": "GHS", "status": "pending", "payUrl": "" }
+      ]
     }
   ]
 }
